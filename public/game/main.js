@@ -18,6 +18,7 @@
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie', 'asset/Flora/carte_prairie.png');
 			game.load.audio('pickup', 'asset/Pickup.wav');
+			game.load.audio('hit', 'asset/Hit.wav');
 		},
 
 		create: function() {
@@ -44,6 +45,9 @@
             var fx = game.add.audio('pickup');
 			fx.addMarker('pickup', 0, 0.2);
 			BasicGame.sounds['pickup'] = fx;
+            fx = game.add.audio('hit');
+			fx.addMarker('hit', 0, 0.2);
+			BasicGame.sounds['hit'] = fx;
 
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
 			new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
