@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="carte_prairie" tilewidth="32" tileheight="32">
+  <image source="carte_prairie.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="cachettes" tilewidth="32" tileheight="32">
+  <image source="cachettes.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="21" name="morceaux_objet" tilewidth="32" tileheight="32">
+  <image source="morceaux_objet.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Fond de carte" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNVEEOgzAMiyoK7djW/f+1A6nWjHEZh6ha4jlucLpERNni8ycUg9+1n8sWyWA0B+yIvxqc49jxs2Anqjk+5kR9kpMD/Jly4HOaPgbv7oz6e4tVMMrruFwtm7s6nbn3fdwIaOM573NrPYf+Nc7+mAlfCNsI07o+9UMVjsVgwDf1GvyQqC+wT7rTi2qOlwP6Wvz8keV0M2ePzaIF+tRvjq/E2a9uf5w25eP/tzjuD+9pku+tXlmlL2spppf6T+elHOqfZHJXfPBTiuM7wHH13lXhYn/eeSdHO3T1TUv42bmAplFdd8btF/qBa7S7bt7II74coBL4
+  </data>
+ </layer>
+ <layer name="Cachette" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYKA+EKaSHnLMoQSI0NBsevuF1oCWYUUOGGzuIRbQO10QY99gCcvB4g56goEsJ8gJbwBmbQD+
+  </data>
+ </layer>
+ <layer name="Objet" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAFEgz0AaJ0sgcXEKNQvziN1VML0Cs+6QHw+YXS+MQHaJlWBypd4APEpBlC4U2NMMPlDlrG9UCDgSwXyUmLANzMAYE=
+  </data>
+ </layer>
+</map>

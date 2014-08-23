@@ -35,6 +35,9 @@
 
 			this.cursors = new Input(game.input.keyboard.createCursorKeys());
 			game.camera.follow(this.player);
+
+			BasicGame.Item.my;
+			BasicGame.Item.foo();
 		},
 
 		update: function() {
