@@ -50,22 +50,14 @@
 			BasicGame.sounds['hit'] = fx;
 
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
-			new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
-
 			
-
-			var mummy = game.add.sprite(800, 900, 'mummy');
-			mummy.animations.add('walk');
-			mummy.animations.play('walk', 20, true);
 
 			game.camera.follow(this.player);
-			
-			new BasicGame.Item(game, 1000, 1000, 'green',1);
-			new BasicGame.Item(game, 1000, 1050, 'blue',2);
-			new BasicGame.Item(game, 1000, 1100, 'blue',2);
-			new BasicGame.Item(game, 1000, 1150, 'blue',2);
-			new BasicGame.Item(game, 1000, 1200, 'red',2);
-			new BasicGame.Item(game, 1100, 1100, 'red',3);
+			this.createCustom();			
+		},
+
+		createCustom: function() {
+
 		},
 
 		update: function() {
@@ -83,7 +75,25 @@
 	};
 
 	var state1 = new BasicGame.DefaultState();
+	var state2 = new BasicGame.DefaultState();
+	var state3 = new BasicGame.DefaultState();
+
+	state1.createCustom = function() {
+		new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
+
+		var mummy = game.add.sprite(800, 900, 'mummy');
+		mummy.animations.add('walk');
+		mummy.animations.play('walk', 20, true);
+
+		new BasicGame.Item(game, 1000, 1000, 'green',1, function(player){player.game.state.start('state2');});
+		new BasicGame.Item(game, 1000, 1050, 'blue',2);
+		new BasicGame.Item(game, 1000, 1100, 'blue',2);
+		new BasicGame.Item(game, 1000, 1150, 'blue',2);
+		new BasicGame.Item(game, 1000, 1200, 'red',2);
+		new BasicGame.Item(game, 1100, 1100, 'red',3);
+	}
 
 	game.state.add('state1', state1);
+	game.state.add('state2', state2);
 	game.state.start('state1');
 })();

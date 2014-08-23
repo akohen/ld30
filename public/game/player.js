@@ -18,14 +18,19 @@ BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
 	if( this.pickup != null ) {
-		this.inventory.push(this.pickup);		
-		if( this.controllable ) {
-			BasicGame.sounds['pickup'].play('pickup');
-			BasicGame.groups['inventory'].add(this.pickup);
-			this.pickup.reset(75, BasicGame.groups['inventory'].countLiving()*25);
+		if( this.pickup.effect == '') {
+			this.inventory.push(this.pickup);		
+			if( this.controllable ) {
+				BasicGame.sounds['pickup'].play('pickup');
+				BasicGame.groups['inventory'].add(this.pickup);
+				this.pickup.reset(75, BasicGame.groups['inventory'].countLiving()*25);
+			} else {
+				BasicGame.groups['otherItems'].add(this.pickup);
+			}
 		} else {
-			BasicGame.groups['otherItems'].add(this.pickup);
+			this.pickup.effect(this);
 		}
+		
 		this.pickup = null;
 	}
 
@@ -60,6 +65,5 @@ BasicGame.Player.prototype.update = function() {
 
 BasicGame.Player.prototype.addItem = function(item) {
 	this.pickup = item;
-	
 };
 
