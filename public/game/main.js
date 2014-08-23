@@ -1,6 +1,5 @@
 (function() {
 	var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
-    var socket = io.connect('http://localhost:8080');
 
 	BasicGame = {
     	score: 0
@@ -23,7 +22,6 @@
 		},
 
 		create: function() {
-			
 			var map = game.add.tilemap('prairie');
 			map.addTilesetImage('carte_prairie', 'carte_prairie');
 			var layer = map.createLayer('Fond de carte');
@@ -35,12 +33,17 @@
 			var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
 			logo.anchor.setTo(0.5, 0.5);
 
+			
 			BasicGame.Groups.init(game);
+
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
             BasicGame.activePointer = game.input.activePointer;
             BasicGame.physics = game.physics.arcade;
             BasicGame.time = game.time;
             BasicGame.add = game.add;
+            BasicGame.game = game;
+
+            BasicGame.messaging = new BasicGame.Messaging();
 
             BasicGame.sounds = [];
             var fx = game.add.audio('pickup');
@@ -50,11 +53,10 @@
 			fx.addMarker('hit', 0, 0.2);
 			BasicGame.sounds['hit'] = fx;
 
-			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
-            socket.emit('connect', {nom: Math.random(), x: this.player.body.x, y: this.player.body.y});
-
-			game.camera.follow(this.player);
-			this.createCustom();			
+			//this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
+            
+			//game.camera.follow(this.player);
+			//this.createCustom();			
 		},
 
 		createCustom: function() {
@@ -78,13 +80,11 @@
 	var state1 = new BasicGame.DefaultState();
 
 	state1.createCustom = function() {
-		new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
-
 		var mummy = game.add.sprite(800, 900, 'mummy');
 		mummy.animations.add('walk');
 		mummy.animations.play('walk', 20, true);
 
-		new BasicGame.Item(game, 1000, 1000, 'green',1, function(player){player.game.state.start('state2');});
+		//new BasicGame.Item(game, 1000, 1000, 'green',1, function(player){player.game.state.start('state2');});
 		new BasicGame.Item(game, 1000, 1050, 'blue',2);
 		new BasicGame.Item(game, 1000, 1100, 'blue',2);
 		new BasicGame.Item(game, 1000, 1150, 'blue',2);
@@ -94,12 +94,5 @@
 
 	game.state.add('state1', state1);
 	game.state.start('state1');
-
-
-    // Quand un nouveau client se connecte, on affiche l'information
-    socket.on('new_connection', function(data) {
-        console.log("il y a un nouveau : "+ JSON.stringify(data));
-        new BasicGame.Item(game, data.x, data.y, 'green',1);
-    });
 
 })();
