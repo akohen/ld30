@@ -13,5 +13,12 @@ BasicGame.Groups = function() {
 
 	this.otherItems = BasicGame.add.group();
 	this.otherItems.visible = false;
+
+	this.clear = function() {
+		this.players.removeAll(true);
+		this.items.removeAll(true);
+		this.inventory.removeAll(true);
+		this.otherItems.removeAll(true);
+	}
 };
 

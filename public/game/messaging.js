@@ -4,13 +4,21 @@ BasicGame.Messaging = function() {
 	var entities = {};
 	socket.emit('connect');
 
-	socket.on('connected', function(playerId, x, y) {
-		console.log('connceted as player ' + playerId);
-		this.playerId = playerId;
-		this.mapId = playerId;
+	var entermap = function(mapId, x, y) {
+		socket.emit('entermap', mapId, x, y);
+		this.mapId = mapId;
+		BasicGame.groups.clear();
 		var player = new BasicGame.Player(BasicGame.game, x, y, 'red', playerId, true);
 		entities.playerId = player;
 		BasicGame.game.camera.follow( player );
+	};
+
+
+	socket.on('connected', function(playerId, mapId, x, y) {
+		console.log('connceted as player ' + playerId);
+		this.playerId = playerId;
+		this.mapId = mapId;
+		entermap(this.mapId, x, y);
 	});
 
 	socket.on('updatePlayer', function(syncId, x, y) {
@@ -28,10 +36,7 @@ BasicGame.Messaging = function() {
 	};
 
 	this.entermap = function(mapId, x, y) {
-		socket.emit('entermap', mapId, x, y);
-		this.mapId = mapId;
-		entities.playerId.x = x;
-		entities.playerId.y = y;
-	};
+		entermap(mapId, x, y);
+	}
 };
 

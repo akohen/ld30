@@ -40,7 +40,7 @@ var addPlayer = function(socket) {
     socket.y = 100;
     socket.inventory = [];
     enterMap(socket);
-    socket.emit('connected', socket.playerId, socket.x, socket.y);
+    socket.emit('connected', socket.playerId, socket.mapId, socket.x, socket.y);
 };
 
 // new client connection

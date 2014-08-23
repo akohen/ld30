@@ -28,7 +28,6 @@ BasicGame.Player.prototype.update = function() {
 			}
 		}
 
-		
 		if( item.effect != '') {
 			item.effect(this);
 		}

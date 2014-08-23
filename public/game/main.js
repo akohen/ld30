@@ -57,7 +57,7 @@
 			//this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
             
 			//game.camera.follow(this.player);
-			this.createCustom();			
+			//this.createCustom();			
 		},
 
 		createCustom: function() {
