@@ -21,17 +21,13 @@
 			game.physics.startSystem(Phaser.Physics.ARCADE);
 			var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
 			logo.anchor.setTo(0.5, 0.5);
+			BasicGame.Groups.init(game);
 
-
-
-			var players = game.add.group();
-			this.player = players.create(game.world.centerX, game.world.centerY, 'red');
-			this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
-
-			this.blue = game.add.sprite(game.world.centerX, game.world.centerY-200, 'blue');
-			this.game.physics.enable(this.blue, Phaser.Physics.ARCADE);
+			this.player = BasicGame.groups["players"].create(game.world.centerX, game.world.centerY, 'red');
+			var test = new BasicGame.Player(this.player);
+			test.foo();
+			this.blue = BasicGame.groups["players"].create(game.world.centerX, game.world.centerY-200, 'blue');
 			this.blue.body.immovable = true;
-			
 
 			var groundBlock = this.game.add.sprite(150, 100, 'green');
 			this.game.physics.enable(groundBlock, Phaser.Physics.ARCADE);
@@ -40,18 +36,21 @@
 			this.cursors = new Input(game.input.keyboard.createCursorKeys());
 			game.camera.follow(this.player);
 
-			/*items = game.add.group();
-			items.enableBody = true;
-			items.physicsBodyType = Phaser.Physics.ARCADE;*/
-
-			BasicGame.Items.init( game, players );
-			BasicGame.Items.addItem(1, 'green', 900, 900);
+			BasicGame.groups["items"].create(game.world.centerX-100, game.world.centerY-100, 'green');
 		},
 
 		update: function() {
 			this.cursors.updateVelocity(this.player.body);
-			game.physics.arcade.collide(this.player, this.blue);
-			BasicGame.Items.update();
+			game.physics.arcade.collide(BasicGame.groups['players']);
+			this.game.physics.arcade.overlap(
+				BasicGame.groups['items'], 
+				BasicGame.groups['players'], 
+				this.collisionHandler
+			);
+		},
+
+		collisionHandler: function(item, player) {
+			console.log("test item");
 		}
 	}
 
