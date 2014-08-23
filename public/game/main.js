@@ -38,15 +38,18 @@
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
 			new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
 
-			BasicGame.groups["inventory"].create(100, 50, 'green');
-
 			var mummy = game.add.sprite(800, 900, 'mummy');
 			mummy.animations.add('walk');
 			mummy.animations.play('walk', 20, true);
 
 			game.camera.follow(this.player);
 			
-			BasicGame.groups["items"].create(game.world.centerX-100, game.world.centerY-100, 'green');
+			new BasicGame.Item(game, 1000, 1000, 'green',1);
+			new BasicGame.Item(game, 1000, 1050, 'blue',2);
+			new BasicGame.Item(game, 1000, 1100, 'blue',2);
+			new BasicGame.Item(game, 1000, 1150, 'blue',2);
+			new BasicGame.Item(game, 1000, 1200, 'red',2);
+			new BasicGame.Item(game, 1100, 1100, 'red',3);
 		},
 
 		update: function() {
@@ -64,7 +67,6 @@
 		},
 
 		collisionHandler: function(item, player) {
-			console.log("test item");
 			player.addItem(item);
 		}
 	};

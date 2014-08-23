@@ -13,9 +13,14 @@ BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
 BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
+	if( this.pickup != null ) {
+		BasicGame.groups['inventory'].add(this.pickup);
+		this.pickup.reset(75, BasicGame.groups['inventory'].countLiving()*25);
+		this.pickup = null;
+	}
 	this.body.velocity.x = 0;
     this.body.velocity.y = 0;
-    
+
 	if( this.controllable ) {
 		var x = 0, y = 0;
 		if (BasicGame.cursors.up.isDown) {
@@ -36,6 +41,12 @@ BasicGame.Player.prototype.update = function() {
 }
 
 BasicGame.Player.prototype.addItem = function(item) {
-	BasicGame.groups['inventory'].add(item);
-	item.reset(100,100);
+	this.pickup = item;
+}
+
+BasicGame.Player.prototype.sortItems = function() {
+	var i = 50;
+	for( var item in this.inventory ) {
+		item.reset(75,i);
+	}
 }
