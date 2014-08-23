@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="carte_prairie_2" tilewidth="32" tileheight="32">
+  <image source="carte_prairie_2.png" width="640" height="224"/>
+ </tileset>
+ <layer name="Sol" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy1mNlTFDEQxrO4KySrLCreWuINb1reujxaeAOPFAgqeOv//+qXMl30NN2dIPjwK9iZSc/XRzqZDEMIx8BxMA1GYAYMGVcEw/8M16NdGwk99wRS72HD9fB4cI1cz5JA6j1MKF9z4CqLh4wx17MukHprHAWToFf+ToFBuefldlSeOQ3OgLPgHDgPLoCL4BLYAO/BJthS9NaIig66JnNLcbsGrpfxC0ass/Y74G6Dn3lOnQAnwSkwy+5H5X4Kem3fBw/AQ/CovGtReT/neYOfN8BNcAvcBvPsflTuRxYDzgvwErwCr8v7Vyv61hpi9dgZn5TYJ2bPy0mOxWfwBXwF38B38AP8BL/A74r+GlJfps/+93Ii57bVkw+C1EfXZH+VtSdz4vXkg5AU2yl056FWe28cTfvtcR5JsZ3YfepDso99CHqtz4b99zgPrmWJXfN0fQSfwt8azH19qkD9vSd+U8+37GyDHfAMjJX8cr0b5Zpnh67lGnwCnjLbVg+hOGh18ha8A8tgRcmvzPkR4f9AsbFs2LbWhsS01uIo8ytzLnMaFRvbjhZZj9PlPdr9lvrzamy76NPWoblQX6f4mun5YcXSWmt5z8v9mnoerzetJ8p6JB2p6GiJOfnGe53We6iWc/y0Wm6pdYpnatSmzavauDxf8lwZlDEUf2lLyw/Fk+ac1X/od489k39PhL11ZO0HYsVXqY3H01ojZT3Id2rjrP1ACt3al/q4Nqp38rW198l3auMsX6PwlWubL7pkDyBfa2sR+VWrzy3H1yh85ePGxjtb89q6r/bmCvUI8lXzj8eCvuU0X/N3mVyzJ8PedUv64fkQiw+kRfNB7gmtvEbhi+ZHfkbWp5eLGLp1R7H29qlWL6itqzm+ubfI+vTmWD906662d9a+ofk3rFdLMezOu82wu/fz5lgsPpC+2t55PdjfFa36xuU5HuN1Iy95DRgwfZYmbsv6rmjVx/dstbOKy2Uc2bA08fhr6zp9N3q9jubiDtO3ELrrCo8hnVUkZifr4f2An+PQ/7Jv0Po6UdFHueJnZouhe/Yjc5zPKvrMTq3XW/O3tRcnYWOV2aDa5vbXQve8xtM2b/g4Cu1rSiw2yJ+Wswq+T/f0jQ1tM6F9r9AvcbL80fxvjZ88y+R5bN0r0By3/JF9hno66fG07RetR+Y5ou1l5b6W72V5LVtr77+cA1l9slan3jNy3h3kfMg6f6nVqffMH8SdDNQ=
+  </data>
+ </layer>
+ <layer name="Mur" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNWWtrxSAMzS9eWb/1NeyFccfdfvQq9XBDdtU4TPVAaH0QjzGJ1s5EtBwyhud6yMzep0N2UTeGel73Eeqm0M7bhlDvhF6pA+/oNwbpBZybFz/nIdF/YH2vwhLGhWjG1vargYUJfEMDZ0UogRK7aOdRE4gjDVrxu9L3S+HojOFeYZE7XEVd2AtqwgVZK+jysWHhf2+ki6evQx4JQa62wKzo851pL8nPWjg6uWnWN8fPan1roXX+i9kPfudIv39YQPLjZxZ+TmyFmP04x5b7R259W8fHJ5157i7qwe/qs3EMP5H6VPwuQiyR4vfK/8BpFM+bCbty+4EfchDKVrEOP3yEMt5f8ZPrCl7edu9G/GIAP84D36A3Vm4VSyMbm3PoJa75+nKf6wWt97ccrrwX+A96t1/r818Ont/emkQCPt/2br+e8olEafxenbtL7AdOmNNGtjy9bu9/2vsNufdZnr+hvyS/cG472e7VfBzc8eOfAf4n+PJKzzukmf5ywvwmoc/LRs/8xX1iZm2w08Z0YnyUfwH9l410
+  </data>
+ </layer>
+ <layer name="Vide" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2LkNgDAABEE3QgO8HfBXwN9/JWwIERKJHexIm198IUhpy2IPQE4FlVRRTU3URW8tddTTQCNNNEfc9LTQShvtdNBJV8xRkiRJkiT95Ffxza9CUgpux+MKhQ==
+  </data>
+ </layer>
+</map>

@@ -16,23 +16,22 @@
 			game.load.image('logo', '../asset/phaser.png');
 			game.load.spritesheet('mummy', '../asset/metalslug_mummy37x45.png', 37, 45, 18);
 			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac.png', 64, 64, 12);
-			game.load.tilemap('prairie', 'asset/Flora/carte_prairie.json', null, Phaser.Tilemap.TILED_JSON);
-			game.load.image('carte_prairie', 'asset/Flora/carte_prairie.png');
+			game.load.tilemap('prairie', 'asset/Flora/carte_prairie2.json', null, Phaser.Tilemap.TILED_JSON);
+			game.load.image('carte_prairie_2', 'asset/Flora/carte_prairie_2.png');
 			game.load.audio('pickup', 'asset/Pickup.wav');
 			game.load.audio('hit', 'asset/Hit.wav');
 		},
 
 		create: function() {
 			var map = game.add.tilemap('prairie');
-			map.addTilesetImage('carte_prairie', 'carte_prairie');
-			var layer = map.createLayer('Fond de carte');
+			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
+			var layer = map.createLayer('layer');
 			layer.resizeWorld();
-			game.world.setBounds(0, 0, 1520, 1520);
+			//game.world.setBounds(0, 0, 1520, 1520);
 			
 
 			game.physics.startSystem(Phaser.Physics.ARCADE);
-			var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
-			logo.anchor.setTo(0.5, 0.5);
+			
 
 			
 			
