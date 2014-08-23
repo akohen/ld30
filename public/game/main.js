@@ -50,6 +50,11 @@
 		},
 
 		update: function() {
+
+            if (game.input.activePointer.isDown){
+                BasicGame.Fighting.hitWithAxe(game, this.player.body);
+            }
+
 			game.physics.arcade.collide(BasicGame.groups['players']);
 			game.physics.arcade.overlap(
 				BasicGame.groups['items'], 
@@ -62,7 +67,7 @@
 			console.log("test item");
 			player.addItem(item);
 		}
-	}
+	};
 
 	var state1 = new BasicGame.DefaultState();
 
