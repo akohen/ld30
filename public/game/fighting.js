@@ -18,6 +18,8 @@ BasicGame.Fighting = (function () {
 
             BasicGame.physics.overlap(zone, BasicGame.groups["players"], function(circle,target){
                 target.damage(player.damageOnHit);
+                target.body.x = target.body.x + (Math.cos(angle) * player.knockback);
+                target.body.y = target.body.y + (Math.sin(angle) * player.knockback);
                 console.log("touché!")
             }, null, this);
 
