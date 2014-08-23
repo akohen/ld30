@@ -7,6 +7,9 @@ BasicGame.Player = function(game, x, y, sprite, controllable) {
     } else {
     	this.controllable = controllable; 
     }
+    this.hittingCd = 300;
+    this.nextHit = 0;
+    this.damageOnHit = 0.4;
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -17,6 +20,12 @@ BasicGame.Player.prototype.update = function() {
     this.body.velocity.y = 0;
     
 	if( this.controllable ) {
+
+        //FIGHT!
+        if (BasicGame.activePointer.isDown){
+            BasicGame.Fighting.hitWithAxe(this);
+        }
+
 		var x = 0, y = 0;
 		if (BasicGame.cursors.up.isDown) {
 			y = -300;
@@ -33,9 +42,9 @@ BasicGame.Player.prototype.update = function() {
     	this.body.velocity.y = y;
 	}
 	
-}
+};
 
 BasicGame.Player.prototype.addItem = function(item) {
 	BasicGame.groups['inventory'].add(item);
 	item.reset(100,100);
-}
+};

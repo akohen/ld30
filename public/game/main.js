@@ -21,9 +21,9 @@
 
 		create: function() {
 			
-			map = game.add.tilemap('prairie');
+			var map = game.add.tilemap('prairie');
 			map.addTilesetImage('carte_prairie', 'carte_prairie');
-			layer = map.createLayer('Fond de carte');
+			var layer = map.createLayer('Fond de carte');
 			layer.resizeWorld();
 			game.world.setBounds(0, 0, 1520, 1520);
 			
@@ -34,6 +34,10 @@
 
 			BasicGame.Groups.init(game);
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
+            BasicGame.activePointer = game.input.activePointer;
+            BasicGame.physics = game.physics.arcade;
+            BasicGame.time = game.time;
+            BasicGame.add = game.add;
 
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
 			new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
@@ -50,11 +54,6 @@
 		},
 
 		update: function() {
-
-            if (game.input.activePointer.isDown){
-                BasicGame.Fighting.hitWithAxe(game, this.player.body);
-            }
-
 			game.physics.arcade.collide(BasicGame.groups['players']);
 			game.physics.arcade.overlap(
 				BasicGame.groups['items'], 
