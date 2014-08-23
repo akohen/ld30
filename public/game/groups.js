@@ -11,6 +11,9 @@ BasicGame.Groups = (function () {
 
 		BasicGame.groups["inventory"] = game.add.group();
 		BasicGame.groups["inventory"].fixedToCamera = true;
+
+		BasicGame.groups["otherItems"] = game.add.group();
+		BasicGame.groups["otherItems"].visible = false;
 	}
 
 	return {

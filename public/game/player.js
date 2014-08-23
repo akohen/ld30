@@ -18,10 +18,17 @@ BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
 	if( this.pickup != null ) {
-		BasicGame.groups['inventory'].add(this.pickup);
-		this.pickup.reset(75, BasicGame.groups['inventory'].countLiving()*25);
+		this.inventory.push(this.pickup);		
+		if( this.controllable ) {
+			BasicGame.sounds['pickup'].play('pickup');
+			BasicGame.groups['inventory'].add(this.pickup);
+			this.pickup.reset(75, BasicGame.groups['inventory'].countLiving()*25);
+		} else {
+			BasicGame.groups['otherItems'].add(this.pickup);
+		}
 		this.pickup = null;
 	}
+
 	this.body.velocity.x = 0;
     this.body.velocity.y = 0;
 
@@ -32,6 +39,7 @@ BasicGame.Player.prototype.update = function() {
             BasicGame.Fighting.hitWithAxe(this);
         }
 
+        //Movement
 		var x = 0, y = 0;
 		if (BasicGame.cursors.up.isDown) {
 			y = -300;
@@ -52,6 +60,6 @@ BasicGame.Player.prototype.update = function() {
 
 BasicGame.Player.prototype.addItem = function(item) {
 	this.pickup = item;
-	BasicGame.sounds['pickup'].play('pickup');
+	
 };
 
