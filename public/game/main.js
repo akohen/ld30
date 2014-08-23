@@ -22,12 +22,16 @@
 			var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
 			logo.anchor.setTo(0.5, 0.5);
 
+
+
+			var players = game.add.group();
+			this.player = players.create(game.world.centerX, game.world.centerY, 'red');
+			this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
+
 			this.blue = game.add.sprite(game.world.centerX, game.world.centerY-200, 'blue');
 			this.game.physics.enable(this.blue, Phaser.Physics.ARCADE);
 			this.blue.body.immovable = true;
-
-			this.player = game.add.sprite(game.world.centerX, game.world.centerY, 'red');
-			this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
+			
 
 			var groundBlock = this.game.add.sprite(150, 100, 'green');
 			this.game.physics.enable(groundBlock, Phaser.Physics.ARCADE);
@@ -36,13 +40,18 @@
 			this.cursors = new Input(game.input.keyboard.createCursorKeys());
 			game.camera.follow(this.player);
 
-			BasicGame.Item.my;
-			BasicGame.Item.foo();
+			/*items = game.add.group();
+			items.enableBody = true;
+			items.physicsBodyType = Phaser.Physics.ARCADE;*/
+
+			BasicGame.Items.init( game, players );
+			BasicGame.Items.addItem(1, 'green', 900, 900);
 		},
 
 		update: function() {
 			this.cursors.updateVelocity(this.player.body);
 			game.physics.arcade.collide(this.player, this.blue);
+			BasicGame.Items.update();
 		}
 	}
 
