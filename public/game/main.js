@@ -75,8 +75,6 @@
 	};
 
 	var state1 = new BasicGame.DefaultState();
-	var state2 = new BasicGame.DefaultState();
-	var state3 = new BasicGame.DefaultState();
 
 	state1.createCustom = function() {
 		new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
@@ -94,6 +92,5 @@
 	}
 
 	game.state.add('state1', state1);
-	game.state.add('state2', state2);
 	game.state.start('state1');
 })();
