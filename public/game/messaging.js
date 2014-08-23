@@ -9,7 +9,7 @@ BasicGame.Messaging = function() {
 		this.playerId = playerId;
 		this.mapId = playerId;
 		var player = new BasicGame.Player(BasicGame.game, x, y, 'red', playerId, true);
-		entities[playerId] = player;
+		entities.playerId = player;
 		BasicGame.game.camera.follow( player );
 	});
 
@@ -24,7 +24,14 @@ BasicGame.Messaging = function() {
 	});
 
 	this.updatePosition = function(player) {
-		socket.emit('updatePosition', player.x, player.y);
+		socket.emit('updatePlayer', player.x, player.y);
+	};
+
+	this.entermap = function(mapId, x, y) {
+		socket.emit('entermap', mapId, x, y);
+		this.mapId = mapId;
+		entities.playerId.x = x;
+		entities.playerId.y = y;
 	};
 };
 

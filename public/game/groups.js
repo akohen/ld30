@@ -1,23 +1,17 @@
-BasicGame.Groups = (function () {
-	var init = function(game) {
-		BasicGame.groups = [];
-		BasicGame.groups["players"] = game.add.group();
-		BasicGame.groups["players"].enableBody = true;
-		BasicGame.groups["players"].physicsBodyType = Phaser.Physics.ARCADE;
+BasicGame.Groups = function() {
+	
+	this.players = BasicGame.add.group();
+	this.players.enableBody = true;
+	this.players.physicsBodyType = Phaser.Physics.ARCADE;
 
-		BasicGame.groups["items"] = game.add.group();
-		BasicGame.groups["items"].enableBody = true;
-		BasicGame.groups["items"].physicsBodyType = Phaser.Physics.ARCADE;
+	this.items = BasicGame.add.group();
+	this.items.enableBody = true;
+	this.items.physicsBodyType = Phaser.Physics.ARCADE;
 
-		BasicGame.groups["inventory"] = game.add.group();
-		BasicGame.groups["inventory"].fixedToCamera = true;
+	this.inventory = BasicGame.add.group();
+	this.inventory.fixedToCamera = true;
 
-		BasicGame.groups["otherItems"] = game.add.group();
-		BasicGame.groups["otherItems"].visible = false;
+	this.otherItems = BasicGame.add.group();
+	this.otherItems.visible = false;
+};
 
-	};
-
-	return {
-		init : init
-	};
-}());

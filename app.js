@@ -55,10 +55,17 @@ io.sockets.on('connection', function (socket) {
         console.log(message);
     });
 
-    socket.on('updatePosition', function (x, y) {
+    socket.on('updatePlayer', function (x, y) {
         socket.x = x;
         socket.y = y;
         socket.broadcast.emit('updatePlayer', socket.playerId, x, y);
+    });
+
+    socket.on('entermap', function (mapId,x,y) {
+        socket.mapId = mapId;
+        socket.x = x;
+        socket.y = y;
+        console.log('entermap ' + socket.playerId + ' ' + mapId);
     });
 
 });

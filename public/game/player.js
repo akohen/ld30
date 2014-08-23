@@ -9,27 +9,29 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.damageOnHit = 0.4;
     this.knockback = 50;
     this.syncId = syncId;
+    this.pickup = [];
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
 BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
-	if( this.pickup != null ) {
-		if( this.pickup.effect == '') {
-			this.inventory.push(this.pickup);		
+	while( this.pickup.length > 0) {
+		var item = this.pickup.pop();
+
+		if(item.inventory) {
+			this.inventory.push(item);
 			if( this.controllable ) {
 				BasicGame.sounds['pickup'].play('pickup');
-				BasicGame.groups['inventory'].add(this.pickup);
-				this.pickup.reset(75, BasicGame.groups['inventory'].countLiving()*25);
-			} else {
-				BasicGame.groups['otherItems'].add(this.pickup);
+				BasicGame.groups['inventory'].add(item);
+				item.reset(75, BasicGame.groups['inventory'].countLiving()*25);
 			}
-		} else {
-			this.pickup.effect(this);
 		}
+
 		
-		this.pickup = null;
+		if( item.effect != '') {
+			item.effect(this);
+		}
 	}
 
 	this.body.velocity.x = 0;
@@ -61,8 +63,3 @@ BasicGame.Player.prototype.update = function() {
 	}
 	
 };
-
-BasicGame.Player.prototype.addItem = function(item) {
-	this.pickup = item;
-};
-
