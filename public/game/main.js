@@ -1,5 +1,6 @@
 (function() {
 	var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+    var socket = io.connect('http://localhost:8080');
 
 	BasicGame = {
     	score: 0
@@ -50,7 +51,7 @@
 			BasicGame.sounds['hit'] = fx;
 
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
-			
+            socket.emit('connect', {nom: Math.random(), x: this.player.body.x, y: this.player.body.y});
 
 			game.camera.follow(this.player);
 			this.createCustom();			
@@ -89,8 +90,16 @@
 		new BasicGame.Item(game, 1000, 1150, 'blue',2);
 		new BasicGame.Item(game, 1000, 1200, 'red',2);
 		new BasicGame.Item(game, 1100, 1100, 'red',3);
-	}
+	};
 
 	game.state.add('state1', state1);
 	game.state.start('state1');
+
+
+    // Quand un nouveau client se connecte, on affiche l'information
+    socket.on('new_connection', function(data) {
+        console.log("il y a un nouveau : "+ JSON.stringify(data));
+        new BasicGame.Item(game, data.x, data.y, 'green',1);
+    });
+
 })();

@@ -1,0 +1,9 @@
+{
+    "name": "ld-30",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "~3.3.4",
+        "socket.io": "~0.9.16",
+        "ent": "~0.1.0"
+    }
+}
