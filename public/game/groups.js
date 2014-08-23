@@ -8,6 +8,9 @@ BasicGame.Groups = (function () {
 		BasicGame.groups["items"] = game.add.group();
 		BasicGame.groups["items"].enableBody = true;
 		BasicGame.groups["items"].physicsBodyType = Phaser.Physics.ARCADE;
+
+		BasicGame.groups["inventory"] = game.add.group();
+		BasicGame.groups["inventory"].fixedToCamera = true;
 	}
 
 	return {

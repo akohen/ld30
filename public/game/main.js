@@ -14,35 +14,44 @@
 			game.load.image('blue', '../asset/blueCube.png');
 			game.load.image('green', '../asset/greenCube.png');
 			game.load.image('logo', '../asset/phaser.png');
+			game.load.spritesheet('mummy', '../asset/metalslug_mummy37x45.png', 37, 45, 18);
+			game.load.tilemap('prairie', 'asset/Flora/carte_prairie.json', null, Phaser.Tilemap.TILED_JSON);
+			game.load.image('carte_prairie', 'asset/Flora/carte_prairie.png');
 		},
 
 		create: function() {
-			game.world.setBounds(0, 0, 1920, 1920);
+			
+			map = game.add.tilemap('prairie');
+			map.addTilesetImage('carte_prairie', 'carte_prairie');
+			layer = map.createLayer('Fond de carte');
+			layer.resizeWorld();
+			game.world.setBounds(0, 0, 1520, 1520);
+			
+
 			game.physics.startSystem(Phaser.Physics.ARCADE);
 			var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
 			logo.anchor.setTo(0.5, 0.5);
+
 			BasicGame.Groups.init(game);
+			BasicGame.cursors = game.input.keyboard.createCursorKeys();
 
-			this.player = BasicGame.groups["players"].create(game.world.centerX, game.world.centerY, 'red');
-			var test = new BasicGame.Player(this.player);
-			test.foo();
-			this.blue = BasicGame.groups["players"].create(game.world.centerX, game.world.centerY-200, 'blue');
-			this.blue.body.immovable = true;
+			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
+			this.blue = new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
 
-			var groundBlock = this.game.add.sprite(150, 100, 'green');
-			this.game.physics.enable(groundBlock, Phaser.Physics.ARCADE);
-			groundBlock.fixedToCamera = true;
+			BasicGame.groups["inventory"].create(100, 50, 'green');
 
-			this.cursors = new Input(game.input.keyboard.createCursorKeys());
+			var mummy = game.add.sprite(800, 900, 'mummy');
+			mummy.animations.add('walk');
+			mummy.animations.play('walk', 20, true);
+
 			game.camera.follow(this.player);
-
+			
 			BasicGame.groups["items"].create(game.world.centerX-100, game.world.centerY-100, 'green');
 		},
 
 		update: function() {
-			this.cursors.updateVelocity(this.player.body);
 			game.physics.arcade.collide(BasicGame.groups['players']);
-			this.game.physics.arcade.overlap(
+			game.physics.arcade.overlap(
 				BasicGame.groups['items'], 
 				BasicGame.groups['players'], 
 				this.collisionHandler
@@ -51,6 +60,7 @@
 
 		collisionHandler: function(item, player) {
 			console.log("test item");
+			player.addItem(item);
 		}
 	}
 
