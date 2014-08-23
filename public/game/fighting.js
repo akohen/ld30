@@ -21,6 +21,7 @@ BasicGame.Fighting = (function () {
                 target.body.x = target.body.x + (Math.cos(angle) * player.knockback);
                 target.body.y = target.body.y + (Math.sin(angle) * player.knockback);
                 console.log("touché!")
+                BasicGame.sounds['hit'].play('hit')
             }, null, this);
 
             player.nextHit = BasicGame.time.now + player.hittingCd;

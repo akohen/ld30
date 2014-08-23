@@ -14,7 +14,8 @@ BasicGame.Groups = (function () {
 
 		BasicGame.groups["otherItems"] = game.add.group();
 		BasicGame.groups["otherItems"].visible = false;
-	}
+
+	};
 
 	return {
 		init : init
