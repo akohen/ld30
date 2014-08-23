@@ -36,7 +36,7 @@
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
 
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
-			this.blue = new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
+			new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
 
 			BasicGame.groups["inventory"].create(100, 50, 'green');
 

@@ -13,6 +13,9 @@ BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
 BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
+	this.body.velocity.x = 0;
+    this.body.velocity.y = 0;
+    
 	if( this.controllable ) {
 		var x = 0, y = 0;
 		if (BasicGame.cursors.up.isDown) {
@@ -28,9 +31,6 @@ BasicGame.Player.prototype.update = function() {
 		}
 		this.body.velocity.x = x;
     	this.body.velocity.y = y;
-	} else {
-		this.body.velocity.x = 0;
-    	this.body.velocity.y = 0;
 	}
 	
 }
