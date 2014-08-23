@@ -8,7 +8,7 @@ BasicGame.Messaging = function() {
 		console.log('connceted as player ' + playerId);
 		this.playerId = playerId;
 		this.mapId = playerId;
-		var player = new BasicGame.Player(BasicGame.game, x, y, 'red', playerId, true);
+		var player = new BasicGame.Player(BasicGame.game, x, y, 'character', playerId, true);
 		entities.playerId = player;
 		BasicGame.game.camera.follow( player );
 	});

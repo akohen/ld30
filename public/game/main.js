@@ -15,6 +15,7 @@
 			game.load.image('green', '../asset/greenCube.png');
 			game.load.image('logo', '../asset/phaser.png');
 			game.load.spritesheet('mummy', '../asset/metalslug_mummy37x45.png', 37, 45, 18);
+			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac.png', 64, 64, 12);
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie', 'asset/Flora/carte_prairie.png');
 			game.load.audio('pickup', 'asset/Pickup.wav');
@@ -55,7 +56,7 @@
 			BasicGame.sounds['hit'] = fx;
 
 			//this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
-            
+
 			//game.camera.follow(this.player);
 			this.createCustom();			
 		},

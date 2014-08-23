@@ -11,6 +11,8 @@ BasicGame.Fighting = (function () {
             var x = player.body.x + (Math.cos(angle) * range);
             var y = player.body.y + (Math.sin(angle) * range);
 
+            player.hitDirection(BasicGame.Utils.angleToDirection(angle));
+
             var zone = BasicGame.add.sprite(x, y, tmp);
             BasicGame.physics.enable( zone );
             zone.body.allowGravity   = false;
