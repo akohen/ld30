@@ -8,7 +8,7 @@ BasicGame.Messaging = function() {
 		socket.emit('entermap', mapId, x, y);
 		this.mapId = mapId;
 		BasicGame.groups.clear();
-		var player = new BasicGame.Player(BasicGame.game, x, y, 'red', playerId, true);
+		var player = new BasicGame.Player(BasicGame.game, x, y, 'character', playerId, true);
 		entities.playerId = player;
 		BasicGame.game.camera.follow( player );
 	};

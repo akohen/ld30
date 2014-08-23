@@ -10,6 +10,17 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.knockback = 50;
     this.syncId = syncId;
     this.pickup = [];
+    this.direction = "bot";
+
+
+    this.animations.add("move_down",[0]);
+    this.animations.add("move_left",[3]);
+    this.animations.add("move_up",[6]);
+    this.animations.add("move_right",[9]);
+    this.animations.add("hit_down",[1,2,0]);
+    this.animations.add("hit_left",[4,5,3]);
+    this.animations.add("hit_up",[7,8,6]);
+    this.animations.add("hit_right",[10,11,9]);
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -35,7 +46,6 @@ BasicGame.Player.prototype.update = function() {
 
 	this.body.velocity.x = 0;
     this.body.velocity.y = 0;
-
 	if( this.controllable ) {
 		BasicGame.messaging.updatePosition(this);
 
@@ -59,6 +69,21 @@ BasicGame.Player.prototype.update = function() {
 		}
 		this.body.velocity.x = x;
     	this.body.velocity.y = y;
-	}
+
+        //Face cursor
+        var angle = BasicGame.physics.angleToPointer(this);
+        this.faceDirection(BasicGame.Utils.angleToDirection(angle));
+    }
 	
+};
+
+BasicGame.Player.prototype.faceDirection = function(direction) {
+    if (direction != this.direction){
+        this.animations.play("move_"+direction);
+        this.direction = direction;
+    }
+};
+
+BasicGame.Player.prototype.hitDirection = function(direction) {
+    this.animations.play("hit_"+direction, 3);
 };
