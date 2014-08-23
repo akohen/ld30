@@ -52,5 +52,6 @@ BasicGame.Player.prototype.update = function() {
 
 BasicGame.Player.prototype.addItem = function(item) {
 	this.pickup = item;
+	BasicGame.sounds['pickup'].play('pickup');
 };
 

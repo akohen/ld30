@@ -17,6 +17,7 @@
 			game.load.spritesheet('mummy', '../asset/metalslug_mummy37x45.png', 37, 45, 18);
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie', 'asset/Flora/carte_prairie.png');
+			game.load.audio('pickup', 'asset/Pickup.wav');
 		},
 
 		create: function() {
@@ -39,8 +40,15 @@
             BasicGame.time = game.time;
             BasicGame.add = game.add;
 
+            BasicGame.sounds = [];
+            var fx = game.add.audio('pickup');
+			fx.addMarker('pickup', 0, 0.2);
+			BasicGame.sounds['pickup'] = fx;
+
 			this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
 			new BasicGame.Player(game, game.world.centerX, game.world.centerY-200, 'blue');
+
+			
 
 			var mummy = game.add.sprite(800, 900, 'mummy');
 			mummy.animations.add('walk');
