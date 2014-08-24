@@ -11,7 +11,6 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.hittingCd = 300;
     this.nextHit = 0;
     this.damageOnHit = 0.4;
-    this.knockback = 50;
     this.syncId = syncId;
     this.pickup = [];
     this.direction = null;
