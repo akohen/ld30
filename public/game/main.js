@@ -23,18 +23,15 @@
 		},
 
 		create: function() {
-			var map = game.add.tilemap('prairie');
-			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
-			var layer = map.createLayer('layer');
-			layer.resizeWorld();
-			//game.world.setBounds(0, 0, 1520, 1520);
-			
 
 			game.physics.startSystem(Phaser.Physics.ARCADE);
-			
 
+			var map = game.add.tilemap('prairie');
+			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
 			
-			
+			var layer = map.createLayer('layer');
+			layer.resizeWorld();			
+			map.setCollisionBetween(110,140, 'layer');
 
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
             BasicGame.activePointer = game.input.activePointer;
@@ -45,6 +42,12 @@
 
             BasicGame.groups = new BasicGame.Groups();
             BasicGame.messaging = new BasicGame.Messaging();
+
+
+            
+			BasicGame.groups.maps.add(layer);
+			BasicGame.layer = layer;
+
 
             BasicGame.sounds = [];
             var fx = game.add.audio('pickup');
@@ -70,6 +73,10 @@
 				BasicGame.groups['items'], 
 				BasicGame.groups['players'], 
 				this.collisionHandler
+			);
+			game.physics.arcade.collide(
+				BasicGame.layer, 
+				BasicGame.groups.players
 			);
 		},
 
