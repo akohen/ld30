@@ -114,7 +114,7 @@ BasicGame.Player.prototype.updateAnimation = function () {
         var direction = BasicGame.Utils.angleToDirection(BasicGame.physics.angleToPointer(this));
         var moving = this.body.velocity.x != 0 || this.body.velocity.y != 0;
         var animation = (moving ? "move_" : "hidle_") + (this.axeSelected ? "axe_" : "") + direction;
-        this.animations.play(animation);
+        this.animations.play(animation, 10);
     }
 };
 
