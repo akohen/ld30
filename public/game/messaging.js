@@ -11,6 +11,7 @@ BasicGame.Messaging = function() {
 		var player = new BasicGame.Player(BasicGame.game, x, y, 'character', playerId, true);
 		entities.playerId = player;
 		BasicGame.game.camera.follow( player );
+        BasicGame.player = player;
 	};
 
 

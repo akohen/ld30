@@ -4,12 +4,12 @@ BasicGame.Fighting = (function () {
         if (BasicGame.time.now > player.nextHit){
 
             var tmp = BasicGame.add.bitmapData(20, 20);
-            var range = 50;
+            var range = 30;
             //tmp.fill( 200, 100, 0, 1 );
 
-            var angle = BasicGame.physics.angleToPointer(player.body);
-            var x = player.body.x + (Math.cos(angle) * range);
-            var y = player.body.y + (Math.sin(angle) * range);
+            var angle = BasicGame.physics.angleToPointer(player);
+            var x = player.x + (Math.cos(angle) * range);
+            var y = player.y + (Math.sin(angle) * range);
 
             player.hitDirection(BasicGame.Utils.angleToDirection(angle));
 
@@ -17,13 +17,14 @@ BasicGame.Fighting = (function () {
             BasicGame.physics.enable( zone );
             zone.body.allowGravity   = false;
             zone.body.immovable      = true;
+            zone.anchor.setTo(0.5,0.5);
 
             BasicGame.physics.overlap(zone, BasicGame.groups["players"], function(circle,target){
                 if (target != player){
                     target.damage(player.damageOnHit);
                     target.body.x = target.body.x + (Math.cos(angle) * player.knockback);
                     target.body.y = target.body.y + (Math.sin(angle) * player.knockback);
-                    console.log("touché!")
+                    console.log("touché!");
                     BasicGame.sounds['hit'].play('hit')
                 }
             }, null, this);

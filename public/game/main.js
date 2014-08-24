@@ -82,7 +82,15 @@
 
 		collisionHandler: function(item, player) {
 			player.pickup.push(item);
-		}
+		},
+
+        render: function(){
+            /*if (BasicGame.player != undefined){
+                game.debug.body(BasicGame.player);
+                var point = new Phaser.Point( BasicGame.player.x, BasicGame.player.y ) ;
+                game.debug.geom( point, 'rgba(255,255,255,1)' ) ;
+            }*/
+        }
 	};
 
 	var state1 = new BasicGame.DefaultState();
