@@ -3,16 +3,17 @@ BasicGame.Messaging = function() {
 	var playerId, mapId;
 	var entities = {};
 	socket.emit('connect');
+	var player = new BasicGame.Player(BasicGame.game, x, y, 'character', playerId, true);
+	entities.playerId = player;
+	BasicGame.game.camera.follow( player );
+    BasicGame.player = player;
 
-	var entermap = function(mapId, x, y) {
+	var entermap = function(mapId, x, y, offsetx, offsety, width, height) {
 		socket.emit('entermap', mapId, x, y);
 		this.mapId = mapId;
-		BasicGame.groups.clear();
-		entities = {};
-		var player = new BasicGame.Player(BasicGame.game, x, y, 'character', playerId, true);
-		entities.playerId = player;
-		BasicGame.game.camera.follow( player );
-        BasicGame.player = player;
+		//BasicGame.groups.clear();
+		//entities = {};
+		BasicGame.game.world.setBounds(offsetx, offsety, width, height);
 	};
 
 
