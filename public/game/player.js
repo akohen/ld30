@@ -78,15 +78,21 @@ BasicGame.Player.prototype.update = function() {
         //Movement
 		var x = 0, y = 0;
         var direction = BasicGame.Utils.angleToDirection(BasicGame.physics.angleToPointer(this));
-		if (BasicGame.cursors.up.isDown) {
+		if (BasicGame.cursors.up.isDown
+            || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.Z).isDown
+            || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.W).isDown) {
 			y = -300;
-		} else if (BasicGame.cursors.down.isDown) {
+		} else if (BasicGame.cursors.down.isDown
+            || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.S).isDown) {
 			y = 300;
 		}
 
-		if (BasicGame.cursors.left.isDown) {
+		if (BasicGame.cursors.left.isDown
+            || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.A).isDown
+            || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.Q).isDown) {
 			x = -300;
-		} else if (BasicGame.cursors.right.isDown) {
+		} else if (BasicGame.cursors.right.isDown
+            || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.D).isDown) {
 			x = 300;
 		}
 		this.body.velocity.x = x;
