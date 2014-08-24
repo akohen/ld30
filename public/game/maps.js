@@ -6,9 +6,10 @@ BasicGame.Map = function(mapId, offsetX, offsetY, width, height) {
     this.height = height;
 
     //BasicGame.maps[mapId] = this;
-
-    this.resizeWorld = function() {
+    this.enterMap = function(player, x, y) {
+        player.x = this.offsetX + x;
+        player.y = this.offsetY + y;
         BasicGame.game.world.setBounds(this.offsetX, this.offsetY, this.width, this.height);
-    }
+    };
 
 };

@@ -30,7 +30,7 @@
 			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
 			
 			var layer = map.createLayer('layer');
-			//layer.resizeWorld();			
+			layer.resizeWorld();			
 			map.setCollisionBetween(110,140, 'layer');
 			
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
@@ -44,8 +44,10 @@
             BasicGame.messaging = new BasicGame.Messaging();
 
             BasicGame.maps = {};
-            new BasicGame.Map(1,0,0,1900,1900);
-            new BasicGame.Map(2,800,800,1900,1900);
+            BasicGame.maps['1'] = new BasicGame.Map(1, 0,0,1900,1900);
+            BasicGame.maps['2'] = new BasicGame.Map(2, 800,800,1900,1900);
+            BasicGame.maps['3'] = new BasicGame.Map(3, 0,0,1900,1900);
+            BasicGame.maps['4'] = new BasicGame.Map(4, 0,0,1900,1900);
            
 			BasicGame.groups.maps.add(layer);
 			BasicGame.layer = layer;
@@ -60,7 +62,7 @@
 			BasicGame.sounds['hit'] = fx;	
 
 			new BasicGame.Item(game, 100, 150, 'blue', 2, false, 
-			function(player) { player.x = 1000; player.y = 1000; } );	
+			function(player) { BasicGame.maps['2'].enterMap(player,0,0); } );	
 			/*new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
 			function(player) { player.x = 500; player.y = 500;  } );*/
 		},
