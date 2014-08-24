@@ -1,12 +1,11 @@
-BasicGame.Fighting = (function () {
-    var hitWithAxe = function(player) {
+BasicGame.Interaction = (function () {
+    var range = 150;
+    var angleDegats = Math.PI / 4;
+
+    var interact = function(player) {
+        var angleSouris = BasicGame.physics.angleToPointer(player);
 
         if (player.axeSelected && BasicGame.time.now > player.nextHit){
-
-            var range = 150;
-            var angleDegats = Math.PI / 4;
-
-            var angleSouris = BasicGame.physics.angleToPointer(player);
 
             BasicGame.groups["players"].forEachAlive(function(target){
                 if (target != player && BasicGame.physics.distanceBetween(player, target) < range){
@@ -24,12 +23,21 @@ BasicGame.Fighting = (function () {
             }, this);
 
             player.animateAttack(BasicGame.Utils.angleToDirection(angleSouris));
-            player.nextHit = BasicGame.time.now + player.hittingCd;
+        }
+        else if (BasicGame.time.now > player.nextHit){
+            BasicGame.groups["pnjs"].forEachAlive(function(target) {
+                if (target != player && BasicGame.physics.distanceBetween(player, target) < range) {
+                    if (Math.abs(angleSouris - BasicGame.physics.angleBetween(player, target)) < (angleDegats / 2)) {
+                        console.log("bonjour")
+                    }
+                }
+            }, this);
         }
 
+        player.nextHit = BasicGame.time.now + player.hittingCd;
     };
 
     return {
-        hitWithAxe : hitWithAxe
+        interact : interact
     };
 }());

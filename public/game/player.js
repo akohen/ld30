@@ -79,7 +79,7 @@ BasicGame.Player.prototype.update = function() {
 
         //FIGHT!
         if (BasicGame.activePointer.isDown){
-            BasicGame.Fighting.hitWithAxe(this);
+            BasicGame.Interaction.interact(this);
         }
 
         //Movement
