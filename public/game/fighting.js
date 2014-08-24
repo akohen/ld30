@@ -26,6 +26,7 @@ BasicGame.Fighting = (function () {
                     target.body.y = target.body.y + (Math.sin(angle) * player.knockback);
                     console.log("touché!");
                     BasicGame.sounds['hit'].play('hit')
+                    target.updateHealthBar();
                 }
             }, null, this);
 

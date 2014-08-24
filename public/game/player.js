@@ -36,6 +36,9 @@ BasicGame.Player.prototype.constructor = BasicGame.Player;
 BasicGame.Player.prototype.update = function() {
     this.label.x = this.x;
     this.label.y = this.y - 25;
+
+    this.healthBar.x = this.x;
+    this.healthBar.y = this.y + 40;
 	while( this.pickup.length > 0) {
 		var item = this.pickup.pop();
 
@@ -95,4 +98,16 @@ BasicGame.Player.prototype.faceDirection = function(direction) {
 
 BasicGame.Player.prototype.hitDirection = function(direction) {
     this.attackAnimation = this.animations.play("hit_"+direction, 10);
+};
+
+BasicGame.Player.prototype.updateHealthBar = function(){
+    if (this.healthBar != undefined){
+        this.healthBar.kill();
+    }
+    var tmp = BasicGame.add.bitmapData(80 * this.health, 10);
+    tmp.fill(0, 255, 0, 1 );
+    this.healthBar = BasicGame.add.sprite(this.x, this.y, tmp);
+
+    this.healthBar.anchor.setTo(0.5,0.5);
+    BasicGame.groups.labels.add(this.healthBar);
 };
