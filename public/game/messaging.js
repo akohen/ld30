@@ -30,7 +30,11 @@ BasicGame.Messaging = function() {
 	});
 
 	socket.on('addItem', function(syncId, itemId, frame, x, y) {
-		entities[syncId] = new BasicGame.Item(BasicGame.game, x, y, 'items', itemId, true, '', frame);
+		entities[syncId] = new BasicGame.Item(BasicGame.game, syncId, x, y, 'items', itemId, true, '', frame);
+	});
+
+	socket.on('removeItem', function(syncId) {
+		entities[syncId].destroy();
 	});
 
 	socket.on('updatePlayer', function(syncId, x, y) {
@@ -38,7 +42,7 @@ BasicGame.Messaging = function() {
 			entities[syncId].x = x;
 			entities[syncId].y = y;
 		} else {
-			entities[syncId] = new BasicGame.Player(BasicGame.game, x, y, 'blue', syncId);
+			entities[syncId] = new BasicGame.Player(BasicGame.game, x, y, 'character2', syncId);
 		}
 		
 	});
