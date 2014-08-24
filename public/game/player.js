@@ -15,7 +15,6 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.pickup = [];
     this.direction = null;
     this.attackAnimation = null;
-    this.movingAnimation = null;
     this.name = nicks[Math.floor(Math.random()*nicks.length)];
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
     this.label.anchor.setTo(0.5,0.5);
@@ -94,14 +93,18 @@ BasicGame.Player.prototype.update = function() {
     	this.body.velocity.y = y;
 
         //Face cursor
-        this.faceDirection(direction);
+        if (x == 0 && y == 0){
+            this.faceDirection(direction);
+        } else if (this.attackAnimation == undefined || this.attackAnimation.isFinished){
+            this.animations.play("move_axe_"+direction);
+        }
     }
 	
 };
 
 BasicGame.Player.prototype.faceDirection = function(direction) {
     if (direction != this.direction && (this.attackAnimation == undefined || this.attackAnimation.isFinished)){
-        this.movingAnimation = this.animations.play("move_"+direction);
+        this.animations.play("move_axe_"+direction);
         this.direction = direction;
     }
 };
