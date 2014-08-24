@@ -51,7 +51,7 @@
             BasicGame.messaging = new BasicGame.Messaging();
 
             BasicGame.maps = {};
-            BasicGame.maps['1'] = new BasicGame.Map(1, 0,0,1900,1900);
+            BasicGame.maps['1'] = new BasicGame.Map(1, 0,0,1280,1280);
             BasicGame.maps['2'] = new BasicGame.Map(2, 800,800,1900,1900);
             BasicGame.maps['3'] = new BasicGame.Map(3, 0,0,1900,1900);
             BasicGame.maps['4'] = new BasicGame.Map(4, 0,0,1900,1900);

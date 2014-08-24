@@ -11,6 +11,7 @@ BasicGame.Messaging = function() {
 	var entermap = function(mapId, x, y) {
 		socket.emit('entermap', mapId, x, y);
 		this.mapId = mapId;
+		BasicGame.maps[mapId].enterMap(BasicGame.player, x, y);
 		//BasicGame.groups.clear();
 		//entities = {};
 		//BasicGame.game.world.setBounds(offsetx, offsety, width, height);
@@ -59,7 +60,7 @@ BasicGame.Messaging = function() {
 	};
 
 	this.pickup = function(item, player) {
-
+		socket.emit('itemPickup', item.syncId, player.syncId);
 	};
 };
 
