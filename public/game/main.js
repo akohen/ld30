@@ -16,12 +16,11 @@
 			game.load.image('green', '../asset/greenCube.png');
 			game.load.image('logo', '../asset/phaser.png');
 
-
 			// Objects
 			game.load.image('portal', '../asset/Objets/Mirror.png');
 			game.load.spritesheet('items', '../asset/Objets/morceaux.png', 32, 32);
 
-			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac.png', 64, 50);
+			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac_New.png', 64, 50);
 
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie2.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie_2', 'asset/Flora/carte_prairie_2.png');
