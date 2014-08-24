@@ -13,6 +13,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.syncId = syncId;
     this.pickup = [];
     this.direction = "down";
+    this.attackAnimation = null;
     this.name = "Pseudo";
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
     this.label.anchor.setTo(0.5,0.5);
@@ -86,12 +87,12 @@ BasicGame.Player.prototype.update = function() {
 };
 
 BasicGame.Player.prototype.faceDirection = function(direction) {
-    if (direction != this.direction){
+    if (direction != this.direction && (this.attackAnimation == undefined || this.attackAnimation.isFinished)){
         this.animations.play("move_"+direction);
         this.direction = direction;
     }
 };
 
 BasicGame.Player.prototype.hitDirection = function(direction) {
-    this.animations.play("hit_"+direction, 3);
+    this.attackAnimation = this.animations.play("hit_"+direction, 3);
 };
