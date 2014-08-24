@@ -73,8 +73,11 @@ io.sockets.on('connection', function (socket) {
 
     //Client request to change map
     socket.on('hit', function (player, damage) {
-        console.log("hit: " + player);
         socket.broadcast.emit('hit', player, damage);
+    });
+
+    socket.on('blood', function (x, y) {
+        socket.broadcast.emit('blood', x, y);
     });
 
     socket.on('disconnect', function () {

@@ -15,6 +15,10 @@ BasicGame.Fighting = (function () {
                         target.updateHealthBar();
                         BasicGame.sounds['hit'].play('hit');
                         BasicGame.messaging.hit(target, player.damageOnHit);
+                        if( target.health <= 0 ) {
+                            BasicGame.groups.blood.add( BasicGame.game.add.sprite(target.x, target.y,'blood', Math.floor(Math.random() * 4) ));
+                            BasicGame.messaging.blood(target.x, target.y);
+                        }
                     }
                 }
             }, this);

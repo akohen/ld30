@@ -48,6 +48,10 @@ BasicGame.Messaging = function() {
 		entities[syncId].updateHealthBar();
 	});
 
+	socket.on('blood', function(x, y) {
+		BasicGame.groups.blood.add( BasicGame.game.add.sprite(x, y,'blood', Math.floor(Math.random() * 4) ));
+	});
+
 	socket.on('updatePlayer', function(syncId, x, y, h) {
 		if (syncId in entities) {
 			entities[syncId].x = x;
@@ -82,6 +86,10 @@ BasicGame.Messaging = function() {
 
 	this.hit = function(player, damage) {
 		socket.emit('hit', player.syncId, damage);
+	};
+
+	this.blood = function(x, y) {
+		socket.emit('blood', x, y);
 	};
 };
 
