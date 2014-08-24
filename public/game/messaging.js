@@ -21,6 +21,10 @@ BasicGame.Messaging = function() {
 		entermap(this.mapId, x, y);
 	});
 
+	socket.on('debug', function(message) {
+		console.log('debug: ' + message);
+	});
+
 	socket.on('updatePlayer', function(syncId, x, y) {
 		if (syncId in entities) {
 			entities[syncId].x = x;

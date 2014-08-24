@@ -44,7 +44,7 @@
             BasicGame.messaging = new BasicGame.Messaging();
 
 
-            
+           
 			BasicGame.groups.maps.add(layer);
 			BasicGame.layer = layer;
 
@@ -55,12 +55,7 @@
 			BasicGame.sounds['pickup'] = fx;
             fx = game.add.audio('hit');
 			fx.addMarker('hit', 0, 0.2);
-			BasicGame.sounds['hit'] = fx;
-
-			//this.player = new BasicGame.Player(game, game.world.centerX, game.world.centerY, 'red', true);
-
-			//game.camera.follow(this.player);
-			//this.createCustom();			
+			BasicGame.sounds['hit'] = fx;		
 		},
 
 		createCustom: function() {
