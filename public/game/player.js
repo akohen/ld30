@@ -15,6 +15,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.pickup = [];
     this.direction = null;
     this.attackAnimation = null;
+    this.movingAnimation = null;
     this.name = nicks[Math.floor(Math.random()*nicks.length)];
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
     this.label.anchor.setTo(0.5,0.5);
@@ -24,19 +25,19 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.updateHealthBar();
 
     var spritePerLine = 7;
-
-    this.animations.add("move_down",[0,1,2]);
-    this.animations.add("move_left",[0 + spritePerLine, 1 + spritePerLine, 2 + spritePerLine]);
-    this.animations.add("move_up",[0 + 2 * spritePerLine, 1 + 2 * spritePerLine, 2 + 2 * spritePerLine]);
-    this.animations.add("move_right",[0 + 3 * spritePerLine, 1 + 3 * spritePerLine, 2 + 3 * spritePerLine]);
-    this.animations.add("move_axe_down",[3,4,5]);
-    this.animations.add("move_axe_left",[3 + spritePerLine, 4 + spritePerLine, 5 + spritePerLine]);
-    this.animations.add("move_axe_up",[3 + 2 * spritePerLine, 4 + 2 * spritePerLine, 5 + 2 * spritePerLine]);
-    this.animations.add("move_axe_right",[3 + 3 * spritePerLine, 4 + 3 * spritePerLine, 5 + 3 * spritePerLine]);
-    this.animations.add("hit_down",[5, 6, 5, 6, 5]);
-    this.animations.add("hit_left",[5 + 1 * spritePerLine, 6 + 1 * spritePerLine, 5 + 1 * spritePerLine, 6 + 1 * spritePerLine, 5 + 1 * spritePerLine]);
-    this.animations.add("hit_up",[5 + 2 * spritePerLine, 6 + 2 * spritePerLine, 5 + 2 * spritePerLine, 6 + 2 * spritePerLine, 5 + 2 * spritePerLine]);
-    this.animations.add("hit_right",[5 + 3 * spritePerLine, 6 + 3 * spritePerLine, 5 + 3 * spritePerLine, 6 + 3 * spritePerLine, 5 + 3 * spritePerLine]);
+    var anims = {
+        hidle : [0],
+        move : [0,1,2],
+        move_axe : [3,4,5],
+        hit : [5,6,5,6,5]
+    };
+    var orientations = ["down", "left", "up", "right"];
+    for (var i = 0; i < orientations.length; i++){
+        for (var anim in anims){
+            var animD = anims[anim].slice().map(function(elem){return elem + i * spritePerLine});
+            this.animations.add("" + anim + "_" + orientations[i], animD);
+        }
+    }
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -100,7 +101,7 @@ BasicGame.Player.prototype.update = function() {
 
 BasicGame.Player.prototype.faceDirection = function(direction) {
     if (direction != this.direction && (this.attackAnimation == undefined || this.attackAnimation.isFinished)){
-        this.animations.play("move_"+direction);
+        this.movingAnimation = this.animations.play("move_"+direction);
         this.direction = direction;
     }
 };
