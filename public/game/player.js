@@ -17,17 +17,17 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.name = "Pseudo";
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
     this.label.anchor.setTo(0.5,0.5);
+    this.body.collideWorldBounds = true;
     BasicGame.groups.labels.add(this.label);
 
-
-    this.animations.add("move_down",[0]);
-    this.animations.add("move_left",[3]);
-    this.animations.add("move_up",[6]);
-    this.animations.add("move_right",[9]);
-    this.animations.add("hit_down",[1,2,0]);
-    this.animations.add("hit_left",[4,5,3]);
-    this.animations.add("hit_up",[7,8,6]);
-    this.animations.add("hit_right",[10,11,9]);
+    this.animations.add("move_down",[0,1,2]);
+    this.animations.add("move_left",[5,6,7]);
+    this.animations.add("move_up",[10,11,12]);
+    this.animations.add("move_right",[15,16,17]);
+    this.animations.add("hit_down",[3,4,3,4]);
+    this.animations.add("hit_left",[8,9,8,9]);
+    this.animations.add("hit_up",[13,14,13,14]);
+    this.animations.add("hit_right",[18,19,18,19]);
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -94,5 +94,5 @@ BasicGame.Player.prototype.faceDirection = function(direction) {
 };
 
 BasicGame.Player.prototype.hitDirection = function(direction) {
-    this.attackAnimation = this.animations.play("hit_"+direction, 3);
+    this.attackAnimation = this.animations.play("hit_"+direction, 10);
 };

@@ -20,7 +20,7 @@ BasicGame.Groups = function() {
 
 	this.clear = function() {
 		this.players.removeAll(true);
-		this.items.removeAll(true);
+		//this.items.removeAll(true);
 		this.labels.removeAll(true);
 		this.inventory.removeAll(true);
 		this.otherItems.removeAll(true);
