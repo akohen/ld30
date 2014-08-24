@@ -51,10 +51,11 @@ io.sockets.on('connection', function (socket) {
     console.log('player ' + socket.playerId + ' connected');
 
     //TODO: remove and replace in main loop
-    socket.on('updatePlayer', function (x, y) {
+    socket.on('updatePlayer', function (x, y, h) {
         socket.x = x;
         socket.y = y;
-        socket.broadcast.emit('updatePlayer', socket.playerId, x, y);
+        socket.h = h;
+        socket.broadcast.emit('updatePlayer', socket.playerId, x, y, h);
         //socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
 
     });
@@ -68,6 +69,12 @@ io.sockets.on('connection', function (socket) {
     //Client request to change map
     socket.on('entermap', function (mapId,x,y) {
         enterMap(socket, mapId, x, y);
+    });
+
+    //Client request to change map
+    socket.on('hit', function (player, damage) {
+        console.log("hit: " + player);
+        socket.broadcast.emit('hit', player, damage);
     });
 
     socket.on('disconnect', function () {

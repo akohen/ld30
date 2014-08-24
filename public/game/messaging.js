@@ -3,15 +3,12 @@ BasicGame.Messaging = function() {
 	var playerId, mapId;
 	var entities = {};
 	socket.emit('connect');
-	var player = new BasicGame.Player(BasicGame.game, 200, 200, 'character', playerId, true);
-	entities.playerId = player;
-	BasicGame.game.camera.follow( player );
-    BasicGame.player = player;
+	
 
 	var entermap = function(mapId, x, y) {
 		socket.emit('entermap', mapId, x, y);
-		this.mapId = mapId;
-		BasicGame.maps[mapId].enterMap(BasicGame.player, x, y);
+		
+		
 		//BasicGame.groups.clear();
 		//entities = {};
 		//BasicGame.game.world.setBounds(offsetx, offsety, width, height);
@@ -22,7 +19,17 @@ BasicGame.Messaging = function() {
 		console.log('connceted as player ' + playerId);
 		this.playerId = playerId;
 		this.mapId = mapId;
-		entermap(this.mapId, x, y);
+
+		var p = new BasicGame.Player(BasicGame.game, 200, 200, 'character', playerId, true);
+
+		entities[playerId] = p;
+		this.player = p;
+
+		BasicGame.game.camera.follow( this.player );
+		
+		entermap(mapId, x, y);
+		console.log(playerId);
+		console.log(entities[playerId]);
 	});
 
 	socket.on('debug', function(message) {
@@ -37,14 +44,20 @@ BasicGame.Messaging = function() {
 		entities[syncId].destroy();
 	});
 
-	socket.on('updatePlayer', function(syncId, x, y) {
+	socket.on('hit', function(syncId, damage) {
+		entities[syncId].damage(damage);
+		entities[syncId].updateHealthBar();
+	});
+
+	socket.on('updatePlayer', function(syncId, x, y, h) {
 		if (syncId in entities) {
 			entities[syncId].x = x;
 			entities[syncId].y = y;
 		} else {
 			entities[syncId] = new BasicGame.Player(BasicGame.game, x, y, 'character2', syncId);
+			entities[syncId].health = h;
+			entities[syncId].updateHealthBar();
 		}
-		
 	});
 
 	socket.on('removePlayer', function(syncId) {
@@ -56,15 +69,20 @@ BasicGame.Messaging = function() {
 	});
 
 	this.updatePosition = function(player) {
-		socket.emit('updatePlayer', player.x, player.y);
+		socket.emit('updatePlayer', player.x, player.y, player.health);
 	};
 
 	this.entermap = function(mapId, x, y) {
-		entermap(mapId, x, y);
+		this.mapId = mapId;
+		BasicGame.maps[mapId].enterMap(this.player, x, y);
 	};
 
 	this.pickup = function(item, player) {
 		socket.emit('itemPickup', item.syncId, player.syncId);
+	};
+
+	this.hit = function(player, damage) {
+		socket.emit('hit', player.syncId, damage);
 	};
 };
 

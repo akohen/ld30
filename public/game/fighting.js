@@ -12,9 +12,9 @@ BasicGame.Fighting = (function () {
                 if (target != player && BasicGame.physics.distanceBetween(player, target) < range){
                     if (Math.abs(angleSouris - BasicGame.physics.angleBetween(player, target)) < (angleDegats / 2)){
                         target.damage(player.damageOnHit);
-                        console.log("touché!");
-                        BasicGame.sounds['hit'].play('hit');
                         target.updateHealthBar();
+                        BasicGame.sounds['hit'].play('hit');
+                        BasicGame.messaging.hit(target, player.damageOnHit);
                     }
                 }
             }, this);
