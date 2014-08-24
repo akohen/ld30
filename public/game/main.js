@@ -41,7 +41,7 @@
 			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
 			
 			var layer = map.createLayer('layer');
-			
+
 			map.setCollisionBetween(21,29, 'layer');
 			map.setCollisionBetween(41,49, 'layer');
 			map.setCollisionBetween(61,69, 'layer');
@@ -107,9 +107,11 @@
 
 		collisionHandler: function(item, player) {
 			player.pickup.push(item);
-			BasicGame.messaging.pickup(item, player);
+			if( item.inventory ) {
+				BasicGame.messaging.pickup(item, player);
+			};
 		},
-
+/*
         render: function(){
             if (BasicGame.player != undefined){
                 game.debug.body(BasicGame.player);
@@ -128,10 +130,10 @@
                 game.debug.geom( limiteHaute, 'rgba(255,255,255,0.6)' ) ;
                 game.debug.geom( limiteBasse, 'rgba(255,255,255,0.6)' ) ;
 
-                /*var point = new Phaser.Point( BasicGame.player.x, BasicGame.player.y ) ;
-                game.debug.geom( point, 'rgba(255,255,255,1)' ) ;*/
+                var point = new Phaser.Point( BasicGame.player.x, BasicGame.player.y ) ;
+                game.debug.geom( point, 'rgba(255,255,255,1)' ) ;
             }
-        }
+        }*/
 	};
 
 	var state1 = new BasicGame.DefaultState();

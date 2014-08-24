@@ -31,6 +31,12 @@ var getAvailableSpawn = function() {
 }
 
 
+// for testing
+/*
+spawnPoints.push(new spawnPoint(13,9));
+spawnPoints.push(new spawnPoint(15,9));
+spawnPoints.push(new spawnPoint(17,9));*/
+
 
 spawnPoints.push(new spawnPoint(7,11));
 spawnPoints.push(new spawnPoint(17,9));
@@ -103,14 +109,15 @@ spawnPoints.push(new spawnPoint(83,52));
 spawnPoints.push(new spawnPoint(116,65));
 
 var spawnItem = function() {
-    var itemId = Math.floor(Math.random()*16);
+    var itemId = Math.floor(Math.random()*4);
     var spawnPoint = getAvailableSpawn();
     var syncId = ++lastId;
     items[syncId] = { x: spawnPoint.x, y:spawnPoint.y, itemId: itemId, spawn: spawnPoint};
     spawnPoint.available = false;
     io.sockets.emit('addItem', syncId, itemId, spawnPoint.x, spawnPoint.y);
 }
-for (i = 0; i < 1; i++) { 
+
+for (i = 0; i < 20; i++) { 
     spawnItem();
 }
 
@@ -123,11 +130,6 @@ var syncItems = function(socket) {
 }
 
 var enterMap = function(socket, mapId, x, y) {
-    /*if( !maps[mapId] ) {
-        maps[mapId] = {};
-        maps[mapId].players = [];
-    }
-    maps[mapId].players.push(socket);*/
     socket.leave(socket.mapId);
     socket.mapId = mapId;
     socket.x = x;
@@ -157,8 +159,6 @@ io.sockets.on('connection', function (socket) {
         socket.y = y;
         socket.h = h;
         socket.broadcast.emit('updatePlayer', socket.playerId, x, y, h);
-        //socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
-
     });
 
     socket.on('itemPickup', function (item, player) {   
@@ -166,7 +166,6 @@ io.sockets.on('connection', function (socket) {
         items[item].spawn.available = true;
         delete items[item];
         socket.broadcast.emit('removeItem', item);
-        //socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
     });
 
     //Client request to change map
