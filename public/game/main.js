@@ -41,7 +41,12 @@
 			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
 			
 			var layer = map.createLayer('layer');
-			layer.resizeWorld();			
+			
+			map.setCollisionBetween(21,29, 'layer');
+			map.setCollisionBetween(41,49, 'layer');
+			map.setCollisionBetween(61,69, 'layer');
+			map.setCollisionBetween(81,89, 'layer');
+			map.setCollisionBetween(101,108, 'layer');
 			map.setCollisionBetween(111,114, 'layer');
 			map.setCollisionBetween(121,140, 'layer');
 			

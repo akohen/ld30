@@ -19,7 +19,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.name = nicks[Math.floor(Math.random()*nicks.length)];
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "12px Arial"});
     this.label.anchor.setTo(0.5,0.5);
-    this.body.collideWorldBounds = true;
+    
     BasicGame.groups.labels.add(this.label);
 
     this.updateHealthBar();

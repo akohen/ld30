@@ -30,7 +30,7 @@ BasicGame.Interaction = (function () {
             BasicGame.groups["pnjs"].forEachAlive(function(target) {
                 if (target != player && BasicGame.physics.distanceBetween(player, target) < range) {
                     if (Math.abs(angleSouris - BasicGame.physics.angleBetween(player, target)) < (angleDegats / 2)) {
-                        console.log("bonjour")
+                        target.talk();
                     }
                 }
             }, this);

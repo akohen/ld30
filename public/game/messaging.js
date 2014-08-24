@@ -20,7 +20,7 @@ BasicGame.Messaging = function() {
 		this.playerId = playerId;
 		this.mapId = mapId;
 
-		var p = new BasicGame.Player(BasicGame.game, 200, 200, 'character', playerId, true);
+		var p = new BasicGame.Player(BasicGame.game, 200, 400, 'character', playerId, true);
 
 		entities[playerId] = p;
 		this.player = p;
