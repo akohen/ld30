@@ -50,7 +50,7 @@ BasicGame.Player.prototype.update = function() {
 			if( this.controllable ) {
 				BasicGame.sounds['pickup'].play('pickup');
 				BasicGame.groups['inventory'].add(item);
-				item.reset(75, BasicGame.groups['inventory'].countLiving()*25);
+				item.reset(40, BasicGame.groups['inventory'].countLiving()*25);
 			}
 		}
 

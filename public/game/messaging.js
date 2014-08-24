@@ -38,6 +38,14 @@ BasicGame.Messaging = function() {
 		
 	});
 
+	socket.on('removePlayer', function(syncId) {
+		if (syncId in entities) {
+			entities[syncId].destroy();
+			entities[syncId].healthBar.destroy();
+			entities[syncId].label.destroy();
+		}
+	});
+
 	this.updatePosition = function(player) {
 		socket.emit('updatePlayer', player.x, player.y);
 	};

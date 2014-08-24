@@ -68,6 +68,10 @@ io.sockets.on('connection', function (socket) {
         enterMap(socket, mapId, x, y);
     });
 
+    socket.on('disconnect', function () {
+        socket.broadcast.emit('removePlayer', socket.playerId);
+    });
+
 });
 var port = process.env.PORT || 8080;
 server.listen(port);

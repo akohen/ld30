@@ -10,14 +10,22 @@
 
 	BasicGame.DefaultState.prototype = {
 		preload: function() {
+			// Debug images
 			game.load.image('red', '../asset/redCube.png');
 			game.load.image('blue', '../asset/blueCube.png');
 			game.load.image('green', '../asset/greenCube.png');
 			game.load.image('logo', '../asset/phaser.png');
-			game.load.spritesheet('mummy', '../asset/metalslug_mummy37x45.png', 37, 45, 18);
+
+
+			// Objects
+			game.load.image('portal', '../asset/Objets/Mirror.png');
+			game.load.spritesheet('items', '../asset/Objets/morceaux.png', 32, 32);
+
 			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac.png', 64, 50);
+
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie2.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie_2', 'asset/Flora/carte_prairie_2.png');
+
 			game.load.audio('pickup', 'asset/Pickup.wav');
 			game.load.audio('hit', 'asset/Hit.wav');
 		},
@@ -61,10 +69,16 @@
 			fx.addMarker('hit', 0, 0.2);
 			BasicGame.sounds['hit'] = fx;	
 
-			new BasicGame.Item(game, 100, 150, 'blue', 2, false, 
-			function(player) { BasicGame.maps['2'].enterMap(player,0,0); } );	
+			new BasicGame.Item(game, 100, 150, 'portal', 2, false, 
+				function(player) { BasicGame.maps['2'].enterMap(player,0,0); } );	
 			/*new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
 			function(player) { player.x = 500; player.y = 500;  } );*/
+
+			new BasicGame.Item(game, 500, 400, 'items', 2, true, '', 0);
+			new BasicGame.Item(game, 500, 450, 'items', 2, true, '', 1);
+			new BasicGame.Item(game, 500, 500, 'items', 2, true, '', 8);
+			new BasicGame.Item(game, 500, 550, 'items', 2, true, '', 4);
+			new BasicGame.Item(game, 400, 500, 'items', 2, true, '', 13);
 		},
 
 		createCustom: function() {
