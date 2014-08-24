@@ -24,6 +24,7 @@ BasicGame.Messaging = function() {
 
 		entities[playerId] = p;
 		this.player = p;
+		BasicGame.player = p;
 
 		BasicGame.game.camera.follow( this.player );
 		
