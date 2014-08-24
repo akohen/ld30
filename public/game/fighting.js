@@ -10,7 +10,7 @@ BasicGame.Fighting = (function () {
 
             BasicGame.groups["players"].forEachAlive(function(target){
                 if (target != player && BasicGame.physics.distanceBetween(player, target) < range){
-                    if (Math.abs(angleSouris - BasicGame.angleBetween(player, target)) < (angleDegats / 2)){
+                    if (Math.abs(angleSouris - BasicGame.physics.angleBetween(player, target)) < (angleDegats / 2)){
                         target.damage(player.damageOnHit);
                         target.body.x = target.body.x + (Math.cos(angleSouris) * player.knockback);
                         target.body.y = target.body.y + (Math.sin(angleSouris) * player.knockback);
