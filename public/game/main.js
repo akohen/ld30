@@ -15,7 +15,7 @@
 			game.load.image('green', '../asset/greenCube.png');
 			game.load.image('logo', '../asset/phaser.png');
 			game.load.spritesheet('mummy', '../asset/metalslug_mummy37x45.png', 37, 45, 18);
-			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac.png', 64, 64, 12);
+			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac.png', 64, 50);
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie2.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie_2', 'asset/Flora/carte_prairie_2.png');
 			game.load.audio('pickup', 'asset/Pickup.wav');
@@ -30,8 +30,9 @@
 			map.addTilesetImage('carte_prairie_2', 'carte_prairie_2');
 			
 			var layer = map.createLayer('layer');
-			layer.resizeWorld();			
+			//layer.resizeWorld();			
 			map.setCollisionBetween(110,140, 'layer');
+			game.world.setBounds(0,0,800,800);
 
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
             BasicGame.activePointer = game.input.activePointer;
@@ -42,8 +43,6 @@
 
             BasicGame.groups = new BasicGame.Groups();
             BasicGame.messaging = new BasicGame.Messaging();
-
-
            
 			BasicGame.groups.maps.add(layer);
 			BasicGame.layer = layer;
@@ -55,7 +54,12 @@
 			BasicGame.sounds['pickup'] = fx;
             fx = game.add.audio('hit');
 			fx.addMarker('hit', 0, 0.2);
-			BasicGame.sounds['hit'] = fx;		
+			BasicGame.sounds['hit'] = fx;	
+
+			new BasicGame.Item(game, 100, 150, 'blue', 2, false, 
+			function() { BasicGame.messaging.entermap(512,150,250); } );	
+			new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
+			function() { BasicGame.messaging.entermap(1024,150,250); } );
 		},
 
 		createCustom: function() {

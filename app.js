@@ -8,29 +8,39 @@ io.set('log level', 1);
 
 app.use(express.static(__dirname + '/public'));
 
+
+var mainLoop = function() {
+    if( io.rooms ) {
+        for (var room in io.rooms){
+            if( room != '' ) {
+                console.log("room: " + room + " clients: " + io.rooms[room]);
+                console.log(maps);
+            }
+        }
+    }
+
+    /**/
+    //io.sockets.in('myRoom').emit('debug', 'message de test');
+    //io.sockets.in('1').emit('debug', 'message de test');
+    setTimeout(mainLoop, 1500);
+}
+
+mainLoop();
+
 var lastId = 0;
 var maps = {};
 
-
-
-var addMap = function() {
-    var map = {};
-    maps['test'] = 'test';
-    console.log(maps.test);
-
-};
-
-var addToMap = function(entity, mapId) {
-    if( !(mapId in maps)) {
-        this.maps.mapId = [];
-    } else {
-        this.maps.mapId.push(entity);
+var enterMap = function(socket, mapId, x, y) {
+    if( !maps[mapId] ) {
+        maps[mapId] = {};
+        maps[mapId].players = [];
     }
-};
-
-var enterMap = function(socket) {
+    maps[mapId].players.push(socket);
+    socket.leave(socket.mapId);
+    socket.mapId = mapId;
+    socket.x = x;
+    socket.y = y;
     socket.join(socket.mapId);
-    socket.emit('entermap', socket.mapId);
 };
 
 var addPlayer = function(socket) {
@@ -39,33 +49,27 @@ var addPlayer = function(socket) {
     socket.x = 100;
     socket.y = 100;
     socket.inventory = [];
-    enterMap(socket);
     socket.emit('connected', socket.playerId, socket.mapId, socket.x, socket.y);
 };
+
 
 // new client connection
 io.sockets.on('connection', function (socket) {
     addPlayer(socket);
-    //changeMap(client);
-    //socket.emit('update', 'player', x, y)
-
     console.log('player ' + socket.playerId + ' connected');
+    //console.log(socket);
 
-    socket.on('message', function (message) {
-        console.log(message);
-    });
-
+    //TODO: remove and replace in main loop
     socket.on('updatePlayer', function (x, y) {
         socket.x = x;
         socket.y = y;
-        socket.broadcast.emit('updatePlayer', socket.playerId, x, y);
+        socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
+
     });
 
+    //Client request to change map
     socket.on('entermap', function (mapId,x,y) {
-        socket.mapId = mapId;
-        socket.x = x;
-        socket.y = y;
-        console.log('entermap ' + socket.playerId + ' ' + mapId);
+        enterMap(socket, mapId, x, y);
     });
 
 });
