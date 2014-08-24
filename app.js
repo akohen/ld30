@@ -8,23 +8,18 @@ io.set('log level', 1);
 
 app.use(express.static(__dirname + '/public'));
 
-
-var mainLoop = function() {
-    if( io.rooms ) {
-        for (var room in io.rooms){
-            if( room != '' ) {
-                //console.log("room: " + room + " clients: " + io.rooms[room]);
-                //console.log(maps);
-            }
-        }
-    }
-    setTimeout(mainLoop, 1500);
-}
-
-//mainLoop();
-
 var lastId = 0;
 var maps = {};
+var items = {};
+items[++lastId] = { x: 300, y:500, itemId: 1, frame: 1};
+items[++lastId] = { x: 300, y:600, itemId: 1, frame: 4};
+items[++lastId] = { x: 300, y:700, itemId: 1, frame: 12};
+
+var syncItems = function(socket) {
+    for( item in items ) {
+        socket.emit('addItem', item, items[item].itemId, items[item].frame, items[item].x, items[item].y);
+    }
+}
 
 var enterMap = function(socket, mapId, x, y) {
     /*if( !maps[mapId] ) {
@@ -46,6 +41,7 @@ var addPlayer = function(socket) {
     socket.y = 100;
     socket.inventory = [];
     socket.emit('connected', socket.playerId, socket.mapId, socket.x, socket.y);
+    syncItems(socket);
 };
 
 

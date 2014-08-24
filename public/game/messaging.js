@@ -28,6 +28,10 @@ BasicGame.Messaging = function() {
 		console.log('debug: ' + message);
 	});
 
+	socket.on('addItem', function(syncId, itemId, frame, x, y) {
+		entities[syncId] = new BasicGame.Item(BasicGame.game, x, y, 'items', itemId, true, '', frame);
+	});
+
 	socket.on('updatePlayer', function(syncId, x, y) {
 		if (syncId in entities) {
 			entities[syncId].x = x;
@@ -52,6 +56,10 @@ BasicGame.Messaging = function() {
 
 	this.entermap = function(mapId, x, y) {
 		entermap(mapId, x, y);
-	}
+	};
+
+	this.pickup = function(item, player) {
+
+	};
 };
 

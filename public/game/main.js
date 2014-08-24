@@ -73,11 +73,11 @@
 			/*new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
 			function(player) { player.x = 500; player.y = 500;  } );*/
 
-			new BasicGame.Item(game, 500, 400, 'items', 2, true, '', 0);
+			/*new BasicGame.Item(game, 500, 400, 'items', 2, true, '', 0);
 			new BasicGame.Item(game, 500, 450, 'items', 2, true, '', 1);
 			new BasicGame.Item(game, 500, 500, 'items', 2, true, '', 8);
 			new BasicGame.Item(game, 500, 550, 'items', 2, true, '', 4);
-			new BasicGame.Item(game, 400, 500, 'items', 2, true, '', 13);
+			new BasicGame.Item(game, 400, 500, 'items', 2, true, '', 13);*/
 		},
 
 		createCustom: function() {
@@ -99,6 +99,7 @@
 
 		collisionHandler: function(item, player) {
 			player.pickup.push(item);
+			BasicGame.messaging.pickup(item, player);
 		},
 
         render: function(){
@@ -126,21 +127,6 @@
 	};
 
 	var state1 = new BasicGame.DefaultState();
-
-	state1.createCustom = function() {
-		var mummy = game.add.sprite(800, 900, 'mummy');
-		mummy.animations.add('walk');
-		mummy.animations.play('walk', 20, true);
-
-		//new BasicGame.Item(game, 1000, 1000, 'green',1, function(player){player.game.state.start('state2');});
-		new BasicGame.Item(game, 100, 150, 'blue', 2, false, 
-			function() { BasicGame.messaging.entermap(512,150,250); } );
-		new BasicGame.Item(game, 200, 200, 'blue',2);
-		new BasicGame.Item(game, 1000, 1150, 'blue',2);
-		new BasicGame.Item(game, 1000, 1200, 'red',2);
-		new BasicGame.Item(game, 1100, 1100, 'red',3);
-	};
-
 	game.state.add('state1', state1);
 	game.state.start('state1');
 
