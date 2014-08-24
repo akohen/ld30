@@ -3,36 +3,26 @@ BasicGame.Fighting = (function () {
 
         if (BasicGame.time.now > player.nextHit){
 
-            var tmp = BasicGame.add.bitmapData(20, 20);
-            var range = 30;
-            //tmp.fill( 200, 100, 0, 1 );
+            var range = 150;
+            var angleDegats = Math.PI / 4;
 
-            var angle = BasicGame.physics.angleToPointer(player);
-            var x = player.x + (Math.cos(angle) * range);
-            var y = player.y + (Math.sin(angle) * range);
+            var angleSouris = BasicGame.physics.angleToPointer(player);
 
-            player.hitDirection(BasicGame.Utils.angleToDirection(angle));
-
-            var zone = BasicGame.add.sprite(x, y, tmp);
-            BasicGame.physics.enable( zone );
-            zone.body.allowGravity   = false;
-            zone.body.immovable      = true;
-            zone.anchor.setTo(0.5,0.5);
-
-            BasicGame.physics.overlap(zone, BasicGame.groups["players"], function(circle,target){
-                if (target != player){
-                    target.damage(player.damageOnHit);
-                    target.body.x = target.body.x + (Math.cos(angle) * player.knockback);
-                    target.body.y = target.body.y + (Math.sin(angle) * player.knockback);
-                    console.log("touché!");
-                    BasicGame.sounds['hit'].play('hit')
-                    target.updateHealthBar();
+            BasicGame.groups["players"].forEachAlive(function(target){
+                if (target != player && BasicGame.physics.distanceBetween(player, target) < range){
+                    if (Math.abs(angleSouris - BasicGame.angleBetween(player, target)) < (angleDegats / 2)){
+                        target.damage(player.damageOnHit);
+                        target.body.x = target.body.x + (Math.cos(angleSouris) * player.knockback);
+                        target.body.y = target.body.y + (Math.sin(angleSouris) * player.knockback);
+                        console.log("touché!");
+                        BasicGame.sounds['hit'].play('hit');
+                        target.updateHealthBar();
+                    }
                 }
-            }, null, this);
+            }, this);
 
+            player.animateAttack(BasicGame.Utils.angleToDirection(angleSouris));
             player.nextHit = BasicGame.time.now + player.hittingCd;
-
-            zone.kill();
         }
 
     };

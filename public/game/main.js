@@ -84,11 +84,26 @@
 		},
 
         render: function(){
-            /*if (BasicGame.player != undefined){
+            if (BasicGame.player != undefined){
                 game.debug.body(BasicGame.player);
-                var point = new Phaser.Point( BasicGame.player.x, BasicGame.player.y ) ;
-                game.debug.geom( point, 'rgba(255,255,255,1)' ) ;
-            }*/
+                var x = BasicGame.player.x;
+                var y = BasicGame.player.y;
+                var range = 150;
+                var angleDegats = Math.PI / 4;
+                var cercle = new Phaser.Circle(x,y, range ) ;
+                game.debug.geom( cercle, 'rgba(255,255,255,0.2)' ) ;
+
+                var angleSouris = BasicGame.physics.angleToPointer(BasicGame.player);
+                var toPointer = BasicGame.Utils.lignePolaire(x,y, angleSouris, range / 2);
+                var limiteHaute = BasicGame.Utils.lignePolaire(x,y, angleSouris + (angleDegats / 2), range / 2);
+                var limiteBasse = BasicGame.Utils.lignePolaire(x,y, angleSouris - (angleDegats / 2), range / 2);
+                game.debug.geom( toPointer, 'rgba(255,255,255,0.6)' ) ;
+                game.debug.geom( limiteHaute, 'rgba(255,255,255,0.6)' ) ;
+                game.debug.geom( limiteBasse, 'rgba(255,255,255,0.6)' ) ;
+
+                /*var point = new Phaser.Point( BasicGame.player.x, BasicGame.player.y ) ;
+                game.debug.geom( point, 'rgba(255,255,255,1)' ) ;*/
+            }
         }
 	};
 

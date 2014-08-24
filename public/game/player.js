@@ -26,10 +26,10 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.animations.add("move_left",[5,6,7]);
     this.animations.add("move_up",[10,11,12]);
     this.animations.add("move_right",[15,16,17]);
-    this.animations.add("hit_down",[3,4,3,4]);
-    this.animations.add("hit_left",[8,9,8,9]);
-    this.animations.add("hit_up",[13,14,13,14]);
-    this.animations.add("hit_right",[18,19,18,19]);
+    this.animations.add("hit_down",[3,4,3,4,3]);
+    this.animations.add("hit_left",[8,9,8,9,8]);
+    this.animations.add("hit_up",[13,14,13,14,13]);
+    this.animations.add("hit_right",[18,19,18,19,18]);
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -98,7 +98,7 @@ BasicGame.Player.prototype.faceDirection = function(direction) {
     }
 };
 
-BasicGame.Player.prototype.hitDirection = function(direction) {
+BasicGame.Player.prototype.animateAttack = function(direction) {
     this.attackAnimation = this.animations.play("hit_"+direction, 10);
 };
 
