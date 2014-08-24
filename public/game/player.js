@@ -3,7 +3,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     Phaser.Sprite.call(this, game, x, y, sprite);
     BasicGame.groups['players'].add(this);
     this.anchor.setTo(0.5,0.5);
-    this.body.setSize(24,30,0,0);
+    this.body.setSize(24,30,0,10);
 
     this.inventory = [];
     if (typeof controllable === 'undefined') { controllable = false; }
