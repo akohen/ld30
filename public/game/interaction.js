@@ -23,6 +23,8 @@ BasicGame.Interaction = (function () {
             }, this);
 
             player.animateAttack(BasicGame.Utils.angleToDirection(angleSouris));
+            player.nextHit = BasicGame.time.now + player.hittingCd;
+
         }
         else if (BasicGame.time.now > player.nextHit){
             BasicGame.groups["pnjs"].forEachAlive(function(target) {
@@ -32,9 +34,9 @@ BasicGame.Interaction = (function () {
                     }
                 }
             }, this);
+            player.nextHit = BasicGame.time.now + player.hittingCd;
         }
 
-        player.nextHit = BasicGame.time.now + player.hittingCd;
     };
 
     return {
