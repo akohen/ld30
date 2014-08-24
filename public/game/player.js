@@ -10,7 +10,10 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.knockback = 50;
     this.syncId = syncId;
     this.pickup = [];
-    this.direction = "bot";
+    this.direction = "down";
+    this.name = "Pseudo";
+    this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
+    BasicGame.groups.labels.add(this.label);
 
 
     this.animations.add("move_down",[0]);
@@ -27,6 +30,8 @@ BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
 BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
+    this.label.x = this.x;
+    this.label.y = this.y;
 	while( this.pickup.length > 0) {
 		var item = this.pickup.pop();
 

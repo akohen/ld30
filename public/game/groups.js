@@ -8,6 +8,8 @@ BasicGame.Groups = function() {
 	this.items.enableBody = true;
 	this.items.physicsBodyType = Phaser.Physics.ARCADE;
 
+	this.labels = BasicGame.add.group();
+
 	this.inventory = BasicGame.add.group();
 	this.inventory.fixedToCamera = true;
 
@@ -17,6 +19,7 @@ BasicGame.Groups = function() {
 	this.clear = function() {
 		this.players.removeAll(true);
 		this.items.removeAll(true);
+		this.labels.removeAll(true);
 		this.inventory.removeAll(true);
 		this.otherItems.removeAll(true);
 	}
