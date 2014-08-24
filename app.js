@@ -70,4 +70,4 @@ io.sockets.on('connection', function (socket) {
 
 });
 
-server.listen(80);
+server.listen(8080);
