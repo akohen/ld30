@@ -36,8 +36,8 @@ BasicGame.Messaging = function() {
 		console.log('debug: ' + message);
 	});
 
-	socket.on('addItem', function(syncId, itemId, frame, x, y) {
-		entities[syncId] = new BasicGame.Item(BasicGame.game, syncId, x, y, 'items', itemId, true, '', frame);
+	socket.on('addItem', function(syncId, itemId, x, y) {
+		entities[syncId] = new BasicGame.Item(BasicGame.game, syncId, x, y, 'items', itemId, true, '', itemId);
 	});
 
 	socket.on('removeItem', function(syncId) {

@@ -11,13 +11,13 @@ app.use(express.static(__dirname + '/public'));
 var lastId = 0;
 var maps = {};
 var items = {};
-items[++lastId] = { x: 300, y:500, itemId: 1, frame: 1};
-items[++lastId] = { x: 300, y:600, itemId: 1, frame: 4};
-items[++lastId] = { x: 300, y:700, itemId: 1, frame: 12};
+items[++lastId] = { x: 300, y:500, itemId: 1};
+items[++lastId] = { x: 300, y:600, itemId: 4};
+items[++lastId] = { x: 300, y:700, itemId: 12};
 
 var syncItems = function(socket) {
     for( item in items ) {
-        socket.emit('addItem', item, items[item].itemId, items[item].frame, items[item].x, items[item].y);
+        socket.emit('addItem', item, items[item].itemId, items[item].x, items[item].y);
     }
 }
 

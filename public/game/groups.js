@@ -2,6 +2,9 @@ BasicGame.Groups = function() {
 	
 	this.maps = BasicGame.add.group();
 	this.blood = BasicGame.add.group();
+	this.pnjs = BasicGame.add.group();
+    this.pnjs.enableBody = true;
+    this.pnjs.physicsBodyType = Phaser.Physics.ARCADE;
 	
 	this.players = BasicGame.add.group();
 	this.players.enableBody = true;
@@ -10,10 +13,6 @@ BasicGame.Groups = function() {
 	this.items = BasicGame.add.group();
 	this.items.enableBody = true;
 	this.items.physicsBodyType = Phaser.Physics.ARCADE;
-
-    this.pnjs = BasicGame.add.group();
-    this.pnjs.enableBody = true;
-    this.pnjs.physicsBodyType = Phaser.Physics.ARCADE;
 
 	this.labels = BasicGame.add.group();
 
