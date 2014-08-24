@@ -94,5 +94,5 @@ BasicGame.Player.prototype.faceDirection = function(direction) {
 };
 
 BasicGame.Player.prototype.hitDirection = function(direction) {
-    this.animations.play("hit_"+direction, 3);
+    this.attackAnimation = this.animations.play("hit_"+direction, 3);
 };
