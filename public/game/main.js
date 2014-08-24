@@ -32,8 +32,7 @@
 			var layer = map.createLayer('layer');
 			//layer.resizeWorld();			
 			map.setCollisionBetween(110,140, 'layer');
-			game.world.setBounds(0,0,800,800);
-
+			
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
             BasicGame.activePointer = game.input.activePointer;
             BasicGame.physics = game.physics.arcade;
@@ -43,6 +42,10 @@
 
             BasicGame.groups = new BasicGame.Groups();
             BasicGame.messaging = new BasicGame.Messaging();
+
+            BasicGame.maps = {};
+            new BasicGame.Map(1,0,0,1900,1900);
+            new BasicGame.Map(2,800,800,1900,1900);
            
 			BasicGame.groups.maps.add(layer);
 			BasicGame.layer = layer;
@@ -57,9 +60,9 @@
 			BasicGame.sounds['hit'] = fx;	
 
 			new BasicGame.Item(game, 100, 150, 'blue', 2, false, 
-			function() { BasicGame.messaging.entermap(512,150,250); } );	
-			new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
-			function() { BasicGame.messaging.entermap(1024,150,250); } );
+			function(player) { player.x = 1000; player.y = 1000; } );	
+			/*new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
+			function(player) { player.x = 500; player.y = 500;  } );*/
 		},
 
 		createCustom: function() {

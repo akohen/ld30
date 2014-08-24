@@ -1,4 +1,5 @@
 BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
+    var nicks = ['Alex', 'Gabi', 'Tibo', 'Flo', 'Val', 'Max', 'Bob', 'Jack', 'Tim', 'Rachel', 'Notch', 'Blue', 'Olav', 'Mike', 'Phil', 'Seth', 'Peter'];
     Phaser.Sprite.call(this, game, x, y, sprite);
     BasicGame.groups['players'].add(this);
     this.anchor.setTo(0.5,0.5);
@@ -14,7 +15,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.pickup = [];
     this.direction = "down";
     this.attackAnimation = null;
-    this.name = "Pseudo";
+    this.name = nicks[Math.floor(Math.random()*nicks.length)];
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
     this.label.anchor.setTo(0.5,0.5);
     this.body.collideWorldBounds = true;

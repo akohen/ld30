@@ -13,29 +13,25 @@ var mainLoop = function() {
     if( io.rooms ) {
         for (var room in io.rooms){
             if( room != '' ) {
-                console.log("room: " + room + " clients: " + io.rooms[room]);
-                console.log(maps);
+                //console.log("room: " + room + " clients: " + io.rooms[room]);
+                //console.log(maps);
             }
         }
     }
-
-    /**/
-    //io.sockets.in('myRoom').emit('debug', 'message de test');
-    //io.sockets.in('1').emit('debug', 'message de test');
     setTimeout(mainLoop, 1500);
 }
 
-mainLoop();
+//mainLoop();
 
 var lastId = 0;
 var maps = {};
 
 var enterMap = function(socket, mapId, x, y) {
-    if( !maps[mapId] ) {
+    /*if( !maps[mapId] ) {
         maps[mapId] = {};
         maps[mapId].players = [];
     }
-    maps[mapId].players.push(socket);
+    maps[mapId].players.push(socket);*/
     socket.leave(socket.mapId);
     socket.mapId = mapId;
     socket.x = x;
@@ -57,13 +53,13 @@ var addPlayer = function(socket) {
 io.sockets.on('connection', function (socket) {
     addPlayer(socket);
     console.log('player ' + socket.playerId + ' connected');
-    //console.log(socket);
 
     //TODO: remove and replace in main loop
     socket.on('updatePlayer', function (x, y) {
         socket.x = x;
         socket.y = y;
-        socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
+        socket.broadcast.emit('updatePlayer', socket.playerId, x, y);
+        //socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
 
     });
 
