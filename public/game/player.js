@@ -13,7 +13,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.knockback = 50;
     this.syncId = syncId;
     this.pickup = [];
-    this.direction = "down";
+    this.direction = null;
     this.attackAnimation = null;
     this.name = nicks[Math.floor(Math.random()*nicks.length)];
     this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
@@ -23,14 +23,20 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
 
     this.updateHealthBar();
 
+    var spritePerLine = 7;
+
     this.animations.add("move_down",[0,1,2]);
-    this.animations.add("move_left",[5,6,7]);
-    this.animations.add("move_up",[10,11,12]);
-    this.animations.add("move_right",[15,16,17]);
-    this.animations.add("hit_down",[3,4,3,4,3]);
-    this.animations.add("hit_left",[8,9,8,9,8]);
-    this.animations.add("hit_up",[13,14,13,14,13]);
-    this.animations.add("hit_right",[18,19,18,19,18]);
+    this.animations.add("move_left",[0 + spritePerLine, 1 + spritePerLine, 2 + spritePerLine]);
+    this.animations.add("move_up",[0 + 2 * spritePerLine, 1 + 2 * spritePerLine, 2 + 2 * spritePerLine]);
+    this.animations.add("move_right",[0 + 3 * spritePerLine, 1 + 3 * spritePerLine, 2 + 3 * spritePerLine]);
+    this.animations.add("move_axe_down",[3,4,5]);
+    this.animations.add("move_axe_left",[3 + spritePerLine, 4 + spritePerLine, 5 + spritePerLine]);
+    this.animations.add("move_axe_up",[3 + 2 * spritePerLine, 4 + 2 * spritePerLine, 5 + 2 * spritePerLine]);
+    this.animations.add("move_axe_right",[3 + 3 * spritePerLine, 4 + 3 * spritePerLine, 5 + 3 * spritePerLine]);
+    this.animations.add("hit_down",[5, 6, 5, 6, 5]);
+    this.animations.add("hit_left",[5 + 1 * spritePerLine, 6 + 1 * spritePerLine, 5 + 1 * spritePerLine, 6 + 1 * spritePerLine, 5 + 1 * spritePerLine]);
+    this.animations.add("hit_up",[5 + 2 * spritePerLine, 6 + 2 * spritePerLine, 5 + 2 * spritePerLine, 6 + 2 * spritePerLine, 5 + 2 * spritePerLine]);
+    this.animations.add("hit_right",[5 + 3 * spritePerLine, 6 + 3 * spritePerLine, 5 + 3 * spritePerLine, 6 + 3 * spritePerLine, 5 + 3 * spritePerLine]);
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -71,6 +77,7 @@ BasicGame.Player.prototype.update = function() {
 
         //Movement
 		var x = 0, y = 0;
+        var direction = BasicGame.Utils.angleToDirection(BasicGame.physics.angleToPointer(this));
 		if (BasicGame.cursors.up.isDown) {
 			y = -300;
 		} else if (BasicGame.cursors.down.isDown) {
@@ -86,8 +93,7 @@ BasicGame.Player.prototype.update = function() {
     	this.body.velocity.y = y;
 
         //Face cursor
-        var angle = BasicGame.physics.angleToPointer(this);
-        this.faceDirection(BasicGame.Utils.angleToDirection(angle));
+        this.faceDirection(direction);
     }
 	
 };
