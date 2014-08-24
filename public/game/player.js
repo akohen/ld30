@@ -16,7 +16,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.direction = null;
     this.attackAnimation = null;
     this.name = nicks[Math.floor(Math.random()*nicks.length)];
-    this.label = BasicGame.game.add.text(x, y, this.name, { font: "10px Arial"});
+    this.label = BasicGame.game.add.text(x, y, this.name, { font: "12px Arial"});
     this.label.anchor.setTo(0.5,0.5);
     this.body.collideWorldBounds = true;
     BasicGame.groups.labels.add(this.label);
@@ -44,7 +44,7 @@ BasicGame.Player.prototype.constructor = BasicGame.Player;
 
 BasicGame.Player.prototype.update = function() {
     this.label.x = this.x;
-    this.label.y = this.y - 25;
+    this.label.y = this.y - 35;
 
     this.healthBar.x = this.x;
     this.healthBar.y = this.y + 40;

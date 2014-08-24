@@ -12,4 +12,8 @@ BasicGame.Map = function(mapId, offsetX, offsetY, width, height) {
         BasicGame.game.world.setBounds(this.offsetX, this.offsetY, this.width, this.height);
     };
 
+    this.getSpawnPoint = function() {
+        
+    }
+
 };

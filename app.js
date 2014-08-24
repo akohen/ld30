@@ -59,6 +59,12 @@ io.sockets.on('connection', function (socket) {
 
     });
 
+    socket.on('itemPickup', function (item, player) {
+        delete items[item];
+        socket.broadcast.emit('removeItem', item);
+        //socket.to(socket.mapId).broadcast.emit('updatePlayer', socket.playerId, x, y);
+    });
+
     //Client request to change map
     socket.on('entermap', function (mapId,x,y) {
         enterMap(socket, mapId, x, y);
