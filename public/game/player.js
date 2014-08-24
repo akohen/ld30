@@ -20,6 +20,8 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.body.collideWorldBounds = true;
     BasicGame.groups.labels.add(this.label);
 
+    this.updateHealthBar();
+
     this.animations.add("move_down",[0,1,2]);
     this.animations.add("move_left",[5,6,7]);
     this.animations.add("move_up",[10,11,12]);
