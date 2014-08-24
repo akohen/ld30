@@ -8,6 +8,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     this.inventory = [];
     if (typeof controllable === 'undefined') { controllable = false; }
     this.controllable = controllable; 
+    this.axeSelected = false;
     this.hittingCd = 300;
     this.nextHit = 0;
     this.damageOnHit = 0.4;
@@ -26,6 +27,7 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
     var spritePerLine = 7;
     var anims = {
         hidle : [0],
+        hidle_axe : [5],
         move : [0,1,2],
         move_axe : [3,4,5],
         hit : [5,6,5,6,5]
@@ -37,6 +39,11 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
             this.animations.add("" + anim + "_" + orientations[i], animD);
         }
     }
+    var outer = this;
+    BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.E).onDown.add(function(){
+        outer.axeSelected = !outer.axeSelected;
+        outer.updateAnimation();
+    });
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -77,7 +84,6 @@ BasicGame.Player.prototype.update = function() {
 
         //Movement
 		var x = 0, y = 0;
-        var direction = BasicGame.Utils.angleToDirection(BasicGame.physics.angleToPointer(this));
 		if (BasicGame.cursors.up.isDown
             || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.Z).isDown
             || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.W).isDown) {
@@ -98,20 +104,17 @@ BasicGame.Player.prototype.update = function() {
 		this.body.velocity.x = x;
     	this.body.velocity.y = y;
 
-        //Face cursor
-        if (x == 0 && y == 0){
-            this.faceDirection(direction);
-        } else if (this.attackAnimation == undefined || this.attackAnimation.isFinished){
-            this.animations.play("move_axe_"+direction);
-        }
+        this.updateAnimation();
     }
 	
 };
 
-BasicGame.Player.prototype.faceDirection = function(direction) {
-    if (direction != this.direction && (this.attackAnimation == undefined || this.attackAnimation.isFinished)){
-        this.animations.play("move_axe_"+direction);
-        this.direction = direction;
+BasicGame.Player.prototype.updateAnimation = function () {
+    if (this.attackAnimation == undefined || this.attackAnimation.isFinished){
+        var direction = BasicGame.Utils.angleToDirection(BasicGame.physics.angleToPointer(this));
+        var moving = this.body.velocity.x != 0 || this.body.velocity.y != 0;
+        var animation = (moving ? "move_" : "hidle_") + (this.axeSelected ? "axe_" : "") + direction;
+        this.animations.play(animation);
     }
 };
 

@@ -1,7 +1,7 @@
 BasicGame.Fighting = (function () {
     var hitWithAxe = function(player) {
 
-        if (BasicGame.time.now > player.nextHit){
+        if (player.axeSelected && BasicGame.time.now > player.nextHit){
 
             var range = 150;
             var angleDegats = Math.PI / 4;
