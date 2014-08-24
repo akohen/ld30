@@ -69,5 +69,5 @@ io.sockets.on('connection', function (socket) {
     });
 
 });
-
-server.listen(8080);
+var port = process.env.PORT || 8080;
+server.listen(port);
