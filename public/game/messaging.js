@@ -4,7 +4,7 @@ BasicGame.Messaging = function() {
 	var entities = {};
 	socket.emit('connect');
 	
-
+/*
 	var entermap = function(mapId, x, y) {
 		socket.emit('entermap', mapId, x, y);
 		
@@ -12,7 +12,7 @@ BasicGame.Messaging = function() {
 		//BasicGame.groups.clear();
 		//entities = {};
 		//BasicGame.game.world.setBounds(offsetx, offsety, width, height);
-	};
+	};*/
 
 
 	socket.on('connected', function(playerId, mapId, x, y) {
@@ -27,8 +27,9 @@ BasicGame.Messaging = function() {
 		BasicGame.player = p;
 
 		BasicGame.game.camera.follow( this.player );
+		BasicGame.maps[mapId].enterMap(this.player, x, y);
 		
-		entermap(mapId, x, y);
+		//entermap(mapId, x, y);
 	});
 
 	socket.on('debug', function(message) {
@@ -75,10 +76,11 @@ BasicGame.Messaging = function() {
 		socket.emit('updatePlayer', player.x, player.y, player.health);
 	};
 
-	this.entermap = function(mapId, x, y) {
+
+	/*this.entermap = function(mapId, x, y) {
 		this.mapId = mapId;
 		BasicGame.maps[mapId].enterMap(this.player, x, y);
-	};
+	};*/
 
 	this.pickup = function(item, player) {
 		socket.emit('itemPickup', item.syncId, player.syncId);

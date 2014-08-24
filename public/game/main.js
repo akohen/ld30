@@ -60,7 +60,7 @@
             BasicGame.maps['2'] = new BasicGame.Map(2, 0,1280,1280,1280);
             BasicGame.maps['3'] = new BasicGame.Map(3, 1280,0,1280,1280);
             BasicGame.maps['4'] = new BasicGame.Map(4, 1280,1280,1280,1280);
-            BasicGame.maps['5'] = new BasicGame.Map(5, 2560,0,2560,1280);
+            BasicGame.maps['5'] = new BasicGame.Map(5, 2560,0,1280,2560);
             BasicGame.maps['6'] = new BasicGame.Map(6, 3840,0,576,1280);
             BasicGame.maps['7'] = new BasicGame.Map(7, 3840,1280,576,1280);
            
@@ -80,15 +80,6 @@
 				function(player) { BasicGame.maps['5'].enterMap(player,200,200); } );
 
             new BasicGame.Pnj(game, 400, 400, 'pnj', 2);
-
-			/*new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
-			function(player) { player.x = 500; player.y = 500;  } );*/
-
-			/*new BasicGame.Item(game, 500, 400, 'items', 2, true, '', 0);
-			new BasicGame.Item(game, 500, 450, 'items', 2, true, '', 1);
-			new BasicGame.Item(game, 500, 500, 'items', 2, true, '', 8);
-			new BasicGame.Item(game, 500, 550, 'items', 2, true, '', 4);
-			new BasicGame.Item(game, 400, 500, 'items', 2, true, '', 13);*/
 		},
 
 		createCustom: function() {
