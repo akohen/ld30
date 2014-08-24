@@ -11,6 +11,10 @@ BasicGame.Groups = function() {
 	this.items.enableBody = true;
 	this.items.physicsBodyType = Phaser.Physics.ARCADE;
 
+    this.pnjs = BasicGame.add.group();
+    this.pnjs.enableBody = true;
+    this.pnjs.physicsBodyType = Phaser.Physics.ARCADE;
+
 	this.labels = BasicGame.add.group();
 
 	this.inventory = BasicGame.add.group();

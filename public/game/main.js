@@ -24,6 +24,8 @@
 			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac_New.png', 64, 50);
 			game.load.spritesheet('character2', '../asset/Characters/Sprite_Charac_New3.png', 64, 50);
 
+            game.load.image('pnj', '../asset/Characters/PNJ.png');
+
 			game.load.tilemap('prairie', 'asset/Flora/carte_prairie2.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('carte_prairie_2', 'asset/Flora/carte_prairie_2.png');
 
@@ -75,8 +77,9 @@
 			BasicGame.sounds['hit'] = fx;	
 
 			new BasicGame.Item(game, -1, 400, 200, 'portal', 2, false, 
-				function(player) { BasicGame.maps['5'].enterMap(player,200,200); } );	
+				function(player) { BasicGame.maps['5'].enterMap(player,200,200); } );
 
+            new BasicGame.Pnj(game, 400, 400, 'pnj', 2);
 
 			/*new BasicGame.Item(game, 300, 150, 'blue', 2, false, 
 			function(player) { player.x = 500; player.y = 500;  } );*/
@@ -94,6 +97,7 @@
 
 		update: function() {
 			game.physics.arcade.collide(BasicGame.groups['players']);
+			game.physics.arcade.collide(BasicGame.groups['players'], BasicGame.groups["pnjs"]);
 			game.physics.arcade.overlap(
 				BasicGame.groups['items'], 
 				BasicGame.groups['players'], 
