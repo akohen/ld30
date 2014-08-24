@@ -1,6 +1,7 @@
 BasicGame.Groups = function() {
 	
 	this.maps = BasicGame.add.group();
+	this.blood = BasicGame.add.group();
 	
 	this.players = BasicGame.add.group();
 	this.players.enableBody = true;

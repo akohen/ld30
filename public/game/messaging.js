@@ -29,8 +29,6 @@ BasicGame.Messaging = function() {
 		BasicGame.game.camera.follow( this.player );
 		
 		entermap(mapId, x, y);
-		console.log(playerId);
-		console.log(entities[playerId]);
 	});
 
 	socket.on('debug', function(message) {

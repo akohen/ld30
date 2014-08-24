@@ -19,6 +19,7 @@
 			// Objects
 			game.load.image('portal', '../asset/Objets/Mirror.png');
 			game.load.spritesheet('items', '../asset/Objets/morceaux.png', 32, 32);
+			game.load.spritesheet('blood', '../asset/Objets/Sang.png', 32, 32);
 
 			game.load.spritesheet('character', '../asset/Characters/Sprite_Charac_New.png', 64, 50);
 			game.load.spritesheet('character2', '../asset/Characters/Sprite_Charac_New3.png', 64, 50);
