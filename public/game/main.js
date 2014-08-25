@@ -1,5 +1,5 @@
 (function() {
-	var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+	var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
 
 	BasicGame = {
     	score: 0
