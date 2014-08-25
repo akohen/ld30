@@ -40,10 +40,12 @@ BasicGame.Player = function(game, x, y, sprite, syncId, controllable) {
         }
     }
     var outer = this;
-    BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.E).onDown.add(function(){
-        outer.axeSelected = !outer.axeSelected;
-        outer.updateAnimation();
-    });
+    if (this.controllable){
+        BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.E).onDown.add(function(){
+            outer.axeSelected = !outer.axeSelected;
+            outer.updateAnimation();
+        });
+    }
 };
 
 BasicGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
