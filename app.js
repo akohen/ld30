@@ -154,11 +154,11 @@ io.sockets.on('connection', function (socket) {
     console.log('player ' + socket.playerId + ' connected');
 
     //TODO: remove and replace in main loop
-    socket.on('updatePlayer', function (x, y, h) {
+    socket.on('updatePlayer', function (x, y, h, animationName, framerate) {
         socket.x = x;
         socket.y = y;
         socket.h = h;
-        socket.broadcast.emit('updatePlayer', socket.playerId, x, y, h);
+        socket.broadcast.emit('updatePlayer', socket.playerId, x, y, h, animationName, framerate);
     });
 
     socket.on('itemPickup', function (item, player) {   

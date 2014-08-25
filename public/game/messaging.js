@@ -53,10 +53,11 @@ BasicGame.Messaging = function() {
 		BasicGame.groups.blood.add( BasicGame.game.add.sprite(x, y,'blood', Math.floor(Math.random() * 4) ));
 	});
 
-	socket.on('updatePlayer', function(syncId, x, y, h) {
+	socket.on('updatePlayer', function(syncId, x, y, h, animation, frameRate) {
 		if (syncId in entities) {
 			entities[syncId].x = x;
 			entities[syncId].y = y;
+            entities[syncId].animations.play(animation, frameRate);
 		} else {
 			entities[syncId] = new BasicGame.Player(BasicGame.game, x, y, 'character2', syncId);
 			entities[syncId].health = h;
@@ -73,7 +74,7 @@ BasicGame.Messaging = function() {
 	});
 
 	this.updatePosition = function(player) {
-		socket.emit('updatePlayer', player.x, player.y, player.health);
+		socket.emit('updatePlayer', player.x, player.y, player.health, player.currentAnimationName, player.currentAnimationFramerate);
 	};
 
 
