@@ -49,6 +49,9 @@
 			map.setCollisionBetween(101,108, 'layer');
 			map.setCollisionBetween(111,114, 'layer');
 			map.setCollisionBetween(121,140, 'layer');
+			map.setCollisionBetween(231,232, 'layer');
+			map.setCollisionBetween(241,246, 'layer');
+			map.setCollisionBetween(261,266, 'layer');
 			
 			BasicGame.cursors = game.input.keyboard.createCursorKeys();
             BasicGame.activePointer = game.input.activePointer;
@@ -84,7 +87,7 @@
 			new BasicGame.Item(game, -1, 400, 200, 'portal', 2, false, 
 				function(player) { BasicGame.maps['5'].enterMap(player,200,200); } );
 
-            new BasicGame.Pnj(game, 400, 400, 'pnj', 2);
+            new BasicGame.Pnj(game, 4140, 190, 'pnj', 2);
 		},
 
 		createCustom: function() {

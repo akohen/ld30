@@ -109,7 +109,7 @@ spawnPoints.push(new spawnPoint(83,52));
 spawnPoints.push(new spawnPoint(116,65));
 
 var spawnItem = function() {
-    var itemId = Math.floor(Math.random()*4);
+    var itemId = Math.floor(Math.random()*16);
     var spawnPoint = getAvailableSpawn();
     var syncId = ++lastId;
     items[syncId] = { x: spawnPoint.x, y:spawnPoint.y, itemId: itemId, spawn: spawnPoint};
@@ -139,7 +139,7 @@ var enterMap = function(socket, mapId, x, y) {
 
 var addPlayer = function(socket) {
     socket.playerId = ++lastId;
-    socket.mapId = 1;
+    socket.mapId = 6;
     socket.x = 200;
     socket.y = 400;
     socket.inventory = [];
