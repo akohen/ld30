@@ -82,7 +82,7 @@ BasicGame.Player.prototype.update = function() {
 		BasicGame.messaging.updatePosition(this);
 
         //FIGHT!
-        if (BasicGame.activePointer.isDown || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)){
+        if (BasicGame.activePointer.isDown || BasicGame.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown){
             BasicGame.Interaction.interact(this);
         }
 
