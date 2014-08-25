@@ -84,9 +84,7 @@ BasicGame.Messaging = function() {
 	};*/
 
 	this.pickup = function(item, player) {
-        if (item.syncId != undefined){
-            socket.emit('itemPickup', item.syncId, player.syncId);
-        }
+        socket.emit('itemPickup', item.syncId, player.syncId);
 	};
 
 	this.hit = function(player, damage) {

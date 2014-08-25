@@ -161,11 +161,13 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('updatePlayer', socket.playerId, x, y, h, animationName, framerate);
     });
 
-    socket.on('itemPickup', function (item, player) {   
-        spawnItem();
-        items[item].spawn.available = true;
-        delete items[item];
-        socket.broadcast.emit('removeItem', item);
+    socket.on('itemPickup', function (item, player) {
+        if (items[item] != undefined){
+            spawnItem();
+            items[item].spawn.available = true;
+            delete items[item];
+            socket.broadcast.emit('removeItem', item);
+        }
     });
 
     //Client request to change map
